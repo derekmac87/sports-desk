@@ -2,7 +2,7 @@
 """Generate SportsDesk.xcodeproj/project.pbxproj for iOS + tvOS + local package."""
 from pathlib import Path
 
-ROOT = Path("/workspace")
+ROOT = Path(__file__).resolve().parent.parent
 SOURCES = [
     "Apps/SportsDesk/SportsDeskApp.swift",
     "Apps/SportsDesk/AppModel.swift",
@@ -10,7 +10,9 @@ SOURCES = [
     "Apps/SportsDesk/Views/RootView.swift",
     "Apps/SportsDesk/Views/DashboardView.swift",
     "Apps/SportsDesk/Views/TeamDashboardView.swift",
+    "Apps/SportsDesk/Views/Components/Components.swift",
     "Apps/SportsDesk/Views/Cards/DashboardCards.swift",
+    "Apps/SportsDesk/Views/Cards/GameHeroCard.swift",
     "Apps/SportsDesk/Views/Details/DetailViews.swift",
     "Apps/SportsDesk/Views/Settings/SettingsView.swift",
 ]
@@ -39,6 +41,7 @@ IDS = {
     "details_group": "A10000000000000000000035",
     "settings_group": "A10000000000000000000036",
     "resources_group": "A10000000000000000000037",
+    "components_group": "A10000000000000000000038",
     "ios_product": "A10000000000000000000040",
     "tv_product": "A10000000000000000000041",
     "assets": "A10000000000000000000050",
@@ -96,7 +99,7 @@ pbx = f"""// !$*UTF8*$!
 	archiveVersion = 1;
 	classes = {{
 	}};
-	objectVersion = 56;
+	objectVersion = 60;
 	objects = {{
 
 /* Begin PBXBuildFile section */
@@ -174,6 +177,7 @@ pbx = f"""// !$*UTF8*$!
 				{file_ids['Apps/SportsDesk/Views/RootView.swift']} /* RootView.swift */,
 				{file_ids['Apps/SportsDesk/Views/DashboardView.swift']} /* DashboardView.swift */,
 				{file_ids['Apps/SportsDesk/Views/TeamDashboardView.swift']} /* TeamDashboardView.swift */,
+				{IDS['components_group']} /* Components */,
 				{IDS['cards_group']} /* Cards */,
 				{IDS['details_group']} /* Details */,
 				{IDS['settings_group']} /* Settings */,
@@ -185,8 +189,17 @@ pbx = f"""// !$*UTF8*$!
 			isa = PBXGroup;
 			children = (
 				{file_ids['Apps/SportsDesk/Views/Cards/DashboardCards.swift']} /* DashboardCards.swift */,
+				{file_ids['Apps/SportsDesk/Views/Cards/GameHeroCard.swift']} /* GameHeroCard.swift */,
 			);
 			path = Cards;
+			sourceTree = "<group>";
+		}};
+		{IDS['components_group']} /* Components */ = {{
+			isa = PBXGroup;
+			children = (
+				{file_ids['Apps/SportsDesk/Views/Components/Components.swift']} /* Components.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		}};
 		{IDS['details_group']} /* Details */ = {{
@@ -270,7 +283,7 @@ pbx = f"""// !$*UTF8*$!
 				LastUpgradeCheck = 1600;
 			}};
 			buildConfigurationList = {IDS['project_configs']} /* Build configuration list for PBXProject "SportsDesk" */;
-			compatibilityVersion = "Xcode 14.0";
+			compatibilityVersion = "Xcode 15.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -368,6 +381,7 @@ pbx = f"""// !$*UTF8*$!
 			isa = XCBuildConfiguration;
 			buildSettings = {{
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Apps/SportsDesk/Resources/SportsDesk.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -392,6 +406,7 @@ pbx = f"""// !$*UTF8*$!
 			isa = XCBuildConfiguration;
 			buildSettings = {{
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Apps/SportsDesk/Resources/SportsDesk.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -415,7 +430,8 @@ pbx = f"""// !$*UTF8*$!
 		{IDS['tv_debug']} /* Debug */ = {{
 			isa = XCBuildConfiguration;
 			buildSettings = {{
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Apps/SportsDesk/Resources/SportsDesk.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -425,7 +441,7 @@ pbx = f"""// !$*UTF8*$!
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sportsdesk.SportsDesk.tvos;
-				PRODUCT_NAME = SportsDesk;
+				PRODUCT_NAME = SportsDeskTV;
 				SDKROOT = appletvos;
 				SUPPORTED_PLATFORMS = "appletvos appletvsimulator";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -438,7 +454,8 @@ pbx = f"""// !$*UTF8*$!
 		{IDS['tv_release']} /* Release */ = {{
 			isa = XCBuildConfiguration;
 			buildSettings = {{
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Apps/SportsDesk/Resources/SportsDesk.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -448,7 +465,7 @@ pbx = f"""// !$*UTF8*$!
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sportsdesk.SportsDesk.tvos;
-				PRODUCT_NAME = SportsDesk;
+				PRODUCT_NAME = SportsDeskTV;
 				SDKROOT = appletvos;
 				SUPPORTED_PLATFORMS = "appletvos appletvsimulator";
 				SWIFT_EMIT_LOC_STRINGS = YES;
