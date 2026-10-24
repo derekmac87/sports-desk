@@ -44,10 +44,19 @@ public struct TeamCatalog: Sendable {
             division: division,
             primaryHex: primary,
             secondaryHex: secondary,
-            logoURL: URL(string: "https://assets.nhle.com/logos/nhl/svg/\(abbrev)_light.svg"),
-            providerCode: abbrev
+            logoURL: logoURL(league: .nhl, abbreviation: abbrev),
+            providerCode: nhlID
         )
     }
+
+    /// ESPN PNG logos (dark-background variants). NHL's own logos are SVG, which AsyncImage/UIImage can't render.
+    public static func logoURL(league: League, abbreviation: String) -> URL? {
+        let code = abbreviation.uppercased()
+        let slug = league == .nhl ? (espnNHLSlugs[code] ?? code.lowercased()) : code.lowercased()
+        return URL(string: "https://a.espncdn.com/i/teamlogos/\(league.rawValue)/500-dark/\(slug).png")
+    }
+
+    private static let espnNHLSlugs = ["LAK": "la", "NJD": "nj", "SJS": "sj", "TBL": "tb", "UTA": "utah"]
 
     private static func nflTeam(
         _ abbrev: String,
@@ -69,7 +78,7 @@ public struct TeamCatalog: Sendable {
             division: division,
             primaryHex: primary,
             secondaryHex: secondary,
-            logoURL: URL(string: "https://a.espncdn.com/i/teamlogos/nfl/500/\(abbrev.lowercased()).png"),
+            logoURL: logoURL(league: .nfl, abbreviation: abbrev),
             providerCode: espnID
         )
     }

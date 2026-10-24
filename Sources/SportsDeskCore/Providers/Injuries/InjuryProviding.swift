@@ -55,10 +55,26 @@ public struct ESPNInjuryProvider: InjuryProviding {
         guard let group else {
             return InjuryReport(sourceName: sourceName, items: [])
         }
-        let items = group.injuries.enumerated().map { index, injury in
-            Self.item(from: injury, fallbackID: "\(team.abbreviation)-\(index)")
-        }
+        let items = group.injuries.enumerated()
+            .map { index, injury in Self.item(from: injury, fallbackID: "\(team.abbreviation)-\(index)") }
+            .enumerated()
+            .sorted { lhs, rhs in
+                let left = severity(status: lhs.element.status), right = severity(status: rhs.element.status)
+                return left == right ? lhs.offset < rhs.offset : left < right
+            }
+            .map(\.element)
         return InjuryReport(sourceName: sourceName, items: items)
+    }
+
+    /// Lower is more serious; used to sort the report.
+    public static func severity(status: String) -> Int {
+        let normalized = status.lowercased()
+        if normalized.contains("reserve") || normalized == "ir" || normalized.contains("pup") || normalized.contains("nfi") { return 0 }
+        if normalized.contains("out") || normalized.contains("suspend") { return 1 }
+        if normalized.contains("doubt") { return 2 }
+        if normalized.contains("question") { return 3 }
+        if normalized.contains("probable") || normalized.contains("day") { return 4 }
+        return 5
     }
 
     static func item(from injury: ESPNInjury, fallbackID: String) -> InjuryItem {

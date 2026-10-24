@@ -39,6 +39,12 @@ struct ESPNNamedStat: Decodable {
 
 struct ESPNScheduleResponse: Decodable {
     var events: [ESPNEvent]?
+    var season: ESPNSeason?
+}
+
+struct ESPNSeason: Decodable {
+    var year: Int?
+    var type: Int?
 }
 
 struct ESPNEvent: Decodable {
@@ -108,6 +114,7 @@ struct ESPNCompetitorTeam: Decodable {
     var abbreviation: String?
     var displayName: String?
     var logo: String?
+    var logos: [ESPNLogo]?
 }
 
 struct ESPNSituation: Decodable {
@@ -207,6 +214,8 @@ struct ESPNRosterGroup: Decodable {
 struct ESPNRosterAthlete: Decodable {
     var id: FlexibleID?
     var displayName: String?
+    var jersey: String?
+    var headshot: ESPNLogo?
     var position: ESPNPosition?
     var injuries: [ESPNRosterInjury]?
 }
