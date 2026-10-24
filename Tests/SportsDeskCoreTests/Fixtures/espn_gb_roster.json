@@ -1,0 +1,280 @@
+{
+  "timestamp": "2026-10-24T17:36:43Z",
+  "status": "success",
+  "season": {
+    "year": 2026,
+    "displayName": "2026",
+    "type": 2,
+    "name": "Regular Season"
+  },
+  "athletes": [
+    {
+      "name": "offense",
+      "items": [
+        {
+          "id": "4242390",
+          "displayName": "Aaron Banks",
+          "jersey": "65",
+          "position": {
+            "abbreviation": "G",
+            "name": "Guard"
+          },
+          "injuries": [
+            {
+              "status": "Questionable",
+              "date": "2026-10-24T02:10Z"
+            }
+          ],
+          "headshot": {
+            "href": "https://a.espncdn.com/i/headshots/nfl/players/full/4242390.png"
+          }
+        },
+        {
+          "id": "4259305",
+          "displayName": "Bo Melton",
+          "jersey": "16",
+          "position": {
+            "abbreviation": "WR",
+            "name": "Wide Receiver"
+          },
+          "injuries": [
+            {
+              "status": "Questionable",
+              "date": "2026-10-24T00:34Z"
+            }
+          ],
+          "headshot": {
+            "href": "https://a.espncdn.com/i/headshots/nfl/players/full/4259305.png"
+          }
+        },
+        {
+          "id": "4240090",
+          "displayName": "Mekhi Becton",
+          "jersey": "74",
+          "position": {
+            "abbreviation": "G",
+            "name": "Guard"
+          },
+          "injuries": [],
+          "headshot": {
+            "href": "https://a.espncdn.com/i/headshots/nfl/players/full/4240090.png"
+          }
+        },
+        {
+          "id": "4873706",
+          "displayName": "Anthony Belton",
+          "jersey": "71",
+          "position": {
+            "abbreviation": "OT",
+            "name": "Offensive Tackle"
+          },
+          "injuries": [],
+          "headshot": {
+            "href": "https://a.espncdn.com/i/headshots/nfl/players/full/4873706.png"
+          }
+        }
+      ]
+    },
+    {
+      "name": "defense",
+      "items": [
+        {
+          "id": "3124005",
+          "displayName": "Zaire Franklin",
+          "jersey": "44",
+          "position": {
+            "abbreviation": "LB",
+            "name": "Linebacker"
+          },
+          "injuries": [
+            {
+              "status": "Out",
+              "date": "2026-10-23T22:08Z"
+            }
+          ],
+          "headshot": {
+            "href": "https://a.espncdn.com/i/headshots/nfl/players/full/3124005.png"
+          }
+        },
+        {
+          "id": "4258206",
+          "displayName": "Benjamin St-Juste",
+          "jersey": "21",
+          "position": {
+            "abbreviation": "CB",
+            "name": "Cornerback"
+          },
+          "injuries": [
+            {
+              "status": "Questionable",
+              "date": "2026-10-20T16:10Z"
+            }
+          ],
+          "headshot": {
+            "href": "https://a.espncdn.com/i/headshots/nfl/players/full/4258206.png"
+          }
+        },
+        {
+          "id": "4373423",
+          "displayName": "Karl Brooks",
+          "jersey": "94",
+          "position": {
+            "abbreviation": "DT",
+            "name": "Defensive Tackle"
+          },
+          "injuries": [],
+          "headshot": {
+            "href": "https://a.espncdn.com/i/headshots/nfl/players/full/4373423.png"
+          }
+        },
+        {
+          "id": "4688930",
+          "displayName": "Javon Bullard",
+          "jersey": "7",
+          "position": {
+            "abbreviation": "S",
+            "name": "Safety"
+          },
+          "injuries": [],
+          "headshot": {
+            "href": "https://a.espncdn.com/i/headshots/nfl/players/full/4688930.png"
+          }
+        }
+      ]
+    },
+    {
+      "name": "specialTeam",
+      "items": [
+        {
+          "id": "4422336",
+          "displayName": "Matt Orzech",
+          "jersey": "42",
+          "position": {
+            "abbreviation": "LS",
+            "name": "Long Snapper"
+          },
+          "injuries": [],
+          "headshot": {
+            "href": "https://a.espncdn.com/i/headshots/nfl/players/full/4422336.png"
+          }
+        },
+        {
+          "id": "4869461",
+          "displayName": "Trey Smack",
+          "jersey": "28",
+          "position": {
+            "abbreviation": "PK",
+            "name": "Place kicker"
+          },
+          "injuries": [],
+          "headshot": {
+            "href": "https://a.espncdn.com/i/headshots/nfl/players/full/4869461.png"
+          }
+        }
+      ]
+    },
+    {
+      "name": "injuredReserveOrOut",
+      "items": [
+        {
+          "id": "4240435",
+          "displayName": "Zach Bako-Bewele",
+          "jersey": "50",
+          "position": {
+            "abbreviation": "OT",
+            "name": "Offensive Tackle"
+          },
+          "injuries": [
+            {
+              "status": "Injured Reserve",
+              "date": "2026-09-29T00:26Z"
+            }
+          ],
+          "headshot": {
+            "href": "https://a.espncdn.com/i/headshots/nfl/players/full/4240435.png"
+          }
+        },
+        {
+          "id": "4709980",
+          "displayName": "Johnathan Baldwin II",
+          "jersey": "37",
+          "position": {
+            "abbreviation": "S",
+            "name": "Safety"
+          },
+          "injuries": [
+            {
+              "status": "Injured Reserve",
+              "date": "2026-08-19T12:07Z"
+            }
+          ],
+          "headshot": {
+            "href": "https://a.espncdn.com/i/headshots/nfl/players/full/4709980.png"
+          }
+        },
+        {
+          "id": "4429136",
+          "displayName": "Warren Brinson",
+          "jersey": "91",
+          "position": {
+            "abbreviation": "DT",
+            "name": "Defensive Tackle"
+          },
+          "injuries": [
+            {
+              "status": "Injured Reserve",
+              "date": "2026-10-03T23:49Z"
+            }
+          ],
+          "headshot": {
+            "href": "https://a.espncdn.com/i/headshots/nfl/players/full/4429136.png"
+          }
+        }
+      ]
+    },
+    {
+      "name": "practiceSquad",
+      "items": [
+        {
+          "id": "5150999",
+          "displayName": "David Blay Jr.",
+          "jersey": "61",
+          "position": {
+            "abbreviation": "DT",
+            "name": "Defensive Tackle"
+          },
+          "injuries": [],
+          "headshot": {
+            "href": "https://a.espncdn.com/i/headshots/nfl/players/full/5150999.png"
+          }
+        },
+        {
+          "id": "4426972",
+          "displayName": "Dalton Cooper",
+          "jersey": "78",
+          "position": {
+            "abbreviation": "OT",
+            "name": "Offensive Tackle"
+          },
+          "injuries": [],
+          "headshot": {
+            "href": "https://a.espncdn.com/i/headshots/nfl/players/full/4426972.png"
+          }
+        }
+      ]
+    }
+  ],
+  "team": {
+    "id": "9",
+    "abbreviation": "GB",
+    "location": "Green Bay",
+    "name": "Packers",
+    "displayName": "Green Bay Packers",
+    "clubhouse": "https://www.espn.com/nfl/team/_/name/gb/green-bay-packers",
+    "color": "204e32",
+    "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/gb.png",
+    "recordSummary": "4-2",
+    "seasonSummary": "2026",
+    "standingSummary": "3rd in NFC North"
+  }
+}

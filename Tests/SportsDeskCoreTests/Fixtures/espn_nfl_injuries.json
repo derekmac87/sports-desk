@@ -1,0 +1,247 @@
+{
+  "timestamp": "2026-10-24T17:36:44Z",
+  "season": {
+    "year": 2026,
+    "type": 2,
+    "name": "Regular Season",
+    "displayName": "2026"
+  },
+  "injuries": [
+    {
+      "id": "9",
+      "displayName": "Green Bay Packers",
+      "injuries": [
+        {
+          "id": "644084",
+          "status": "Questionable",
+          "date": "2026-10-24T02:10Z",
+          "shortComment": "Banks (knee/toe) is listed as questionable for Sunday's game against the Lions, Wes Hodkiewicz of the Packers' official site reports.",
+          "longComment": "Banks has missed the Packers' last four games while working through toe and knee injuries, but he has a chance to make his return for Sunday's NFC North tilt. Laken Tomlinson would continue to start at left guard if Banks cannot play.",
+          "type": {
+            "id": "2",
+            "name": "INJURY_STATUS_QUESTIONABLE",
+            "description": "questionable",
+            "abbreviation": "Q"
+          },
+          "details": {
+            "fantasyStatus": {
+              "description": "QUESTIONABLE",
+              "abbreviation": "QUESTIONABLE"
+            },
+            "type": "Knee",
+            "location": "Leg",
+            "detail": "Not Specified",
+            "side": "Not Specified",
+            "returnDate": "2026-10-25"
+          },
+          "athlete": {
+            "displayName": "Aaron Banks",
+            "firstName": "Aaron",
+            "lastName": "Banks",
+            "position": {
+              "id": "73",
+              "name": "Guard",
+              "displayName": "Guard",
+              "abbreviation": "G",
+              "leaf": false
+            },
+            "headshot": {
+              "href": "https://a.espncdn.com/i/headshots/nfl/players/full/4242390.png",
+              "alt": "Aaron Banks"
+            }
+          }
+        },
+        {
+          "id": "644033",
+          "status": "Questionable",
+          "date": "2026-10-24T00:34Z",
+          "shortComment": "Melton (back) is questionable for Sunday's game against the Lions, Wes Hodkiewicz of the Packers' official site reports.",
+          "longComment": "Melton opened Week 7 prep with back-to-back DNP's, but his limited session Friday was enough for him to draw the questionable tag for Sunday's NFC North tilt. Savion Williams would see an uptick on both offense and special teams as a returner on kickoffs and punts if Melton cannot play against Detroit.",
+          "type": {
+            "id": "2",
+            "name": "INJURY_STATUS_QUESTIONABLE",
+            "description": "questionable",
+            "abbreviation": "Q"
+          },
+          "details": {
+            "fantasyStatus": {
+              "description": "QUESTIONABLE",
+              "abbreviation": "QUESTIONABLE"
+            },
+            "type": "Back",
+            "location": "Torso",
+            "detail": "Not Specified",
+            "side": "Not Specified",
+            "returnDate": "2026-10-25"
+          },
+          "athlete": {
+            "displayName": "Bo Melton",
+            "firstName": "Bo",
+            "lastName": "Melton",
+            "position": {
+              "id": "1",
+              "name": "Wide Receiver",
+              "displayName": "Wide Receiver",
+              "abbreviation": "WR",
+              "leaf": true
+            },
+            "headshot": {
+              "href": "https://a.espncdn.com/i/headshots/nfl/players/full/4259305.png",
+              "alt": "Bo Melton"
+            }
+          }
+        },
+        {
+          "id": "643977",
+          "status": "Out",
+          "date": "2026-10-23T22:08Z",
+          "shortComment": "Franklin (shin) has been ruled out ahead of Sunday's game against the Lions, Weston Hodkiewicz of the Packers' official site reports.",
+          "longComment": "Head coach Mike LaFleur told reporters Friday that Franklin injured his shin on a collision during Thursday's practice, and the injury is severe enough for the veteran linebacker to miss his first game of the 2026 season. He's played every defensive snap in five of six games, and that workload will likely fall on Isaiah McDuffie or Nick Niemann for Sunday's NFC North tilt. Franklin's next chance to play is Week 8 against the Panthers on Thursday.",
+          "type": {
+            "id": "4",
+            "name": "INJURY_STATUS_OUT",
+            "description": "out",
+            "abbreviation": "O"
+          },
+          "details": {
+            "fantasyStatus": {
+              "description": "OUT",
+              "abbreviation": "OUT"
+            },
+            "type": "Shin",
+            "location": "Leg",
+            "detail": "Not Specified",
+            "side": "Not Specified",
+            "returnDate": "2026-10-29"
+          },
+          "athlete": {
+            "displayName": "Zaire Franklin",
+            "firstName": "Zaire",
+            "lastName": "Franklin",
+            "position": {
+              "id": "30",
+              "name": "Linebacker",
+              "displayName": "Linebacker",
+              "abbreviation": "LB",
+              "leaf": true
+            },
+            "headshot": {
+              "href": "https://a.espncdn.com/i/headshots/nfl/players/full/3124005.png",
+              "alt": "Zaire Franklin"
+            }
+          }
+        },
+        {
+          "id": "643794",
+          "status": "Out",
+          "date": "2026-10-22T20:48Z",
+          "shortComment": "Packers head coach Matt Lafleur said Thursday it's \"tough to say\" whether Musgrave (neck) plays this season, Weston Hodkiewicz of the Packers' official site reports.",
+          "longComment": "Musgrave has yet to return to the Packers since being placed on the PUP list prior to Week 1 of the regular season, and until the 26-year-old proves otherwise, he will likely continue to sit out. Tucker Kraft and Jonnu Smith will continue leading the charge at the tight end position.",
+          "type": {
+            "id": "4",
+            "name": "INJURY_STATUS_OUT",
+            "description": "out",
+            "abbreviation": "O"
+          },
+          "details": {
+            "fantasyStatus": {
+              "description": "PUP-R",
+              "abbreviation": "PUP-R"
+            },
+            "type": "Neck",
+            "location": "Head",
+            "detail": "Not Specified",
+            "side": "Not Specified",
+            "returnDate": "2026-11-25"
+          },
+          "athlete": {
+            "displayName": "Luke Musgrave",
+            "firstName": "Luke",
+            "lastName": "Musgrave",
+            "position": {
+              "id": "7",
+              "name": "Tight End",
+              "displayName": "Tight End",
+              "abbreviation": "TE",
+              "leaf": true
+            },
+            "headshot": {
+              "href": "https://a.espncdn.com/i/headshots/nfl/players/full/4428085.png",
+              "alt": "Luke Musgrave"
+            }
+          }
+        },
+        {
+          "id": "-2049775",
+          "status": "Questionable",
+          "date": "2026-10-20T16:10Z",
+          "shortComment": "questionable",
+          "longComment": "questionable",
+          "type": {
+            "id": "2",
+            "name": "INJURY_STATUS_QUESTIONABLE",
+            "description": "questionable",
+            "abbreviation": "Q"
+          },
+          "details": {
+            "fantasyStatus": {
+              "description": "QUESTIONABLE",
+              "abbreviation": "QUESTIONABLE"
+            },
+            "type": "Hamstring",
+            "location": "Leg",
+            "detail": "Not Specified",
+            "side": "Not Specified",
+            "returnDate": "2026-10-25"
+          },
+          "athlete": {
+            "displayName": "Benjamin St-Juste",
+            "firstName": "Benjamin",
+            "lastName": "St-Juste",
+            "position": {
+              "id": "29",
+              "name": "Cornerback",
+              "displayName": "Cornerback",
+              "abbreviation": "CB",
+              "leaf": true
+            },
+            "headshot": {
+              "href": "https://a.espncdn.com/i/headshots/nfl/players/full/4258206.png",
+              "alt": "Benjamin St-Juste"
+            }
+          }
+        },
+        {
+          "id": "644034",
+          "status": "Active",
+          "date": "2026-10-24T00:36Z",
+          "shortComment": "Van Ness (illness) does not have an injury designation for Sunday's game against the Lions.",
+          "longComment": "Van Ness popped up on Thursday's practice report as a limited participant due to an illness, but the fourth-year pro will avoid an injury tag after logging a full session Friday. He's accumulated 27 tackles (17 solo), including 3.5 sacks, through six regular-season games.",
+          "type": {
+            "id": "0",
+            "name": "INJURY_STATUS_ACTIVE",
+            "description": "active",
+            "abbreviation": "A"
+          },
+          "details": null,
+          "athlete": {
+            "displayName": "Lukas Van Ness",
+            "firstName": "Lukas",
+            "lastName": "Van Ness",
+            "position": {
+              "id": "31",
+              "name": "Defensive End",
+              "displayName": "Defensive End",
+              "abbreviation": "DE",
+              "leaf": true
+            },
+            "headshot": {
+              "href": "https://a.espncdn.com/i/headshots/nfl/players/full/4686906.png",
+              "alt": "Lukas Van Ness"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

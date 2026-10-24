@@ -1,0 +1,69 @@
+{
+  "props": {
+    "pageProps": {
+      "team": {
+        "name": "Toronto Maple Leafs",
+        "abbreviation": "TOR"
+      },
+      "lineCombination": {
+        "updatedAt": "2026-10-24T14:00:00.000Z",
+        "source": "Morning skate (Projected)",
+        "forwards": [
+          {
+            "lw": {
+              "id": "8479318",
+              "name": "Matthew Knies"
+            },
+            "c": {
+              "id": "8479318a",
+              "name": "Auston Matthews"
+            },
+            "rw": {
+              "id": "8477939",
+              "name": "William Nylander"
+            }
+          },
+          {
+            "lw": {
+              "name": "Nicholas Robertson"
+            },
+            "c": {
+              "name": "John Tavares"
+            },
+            "rw": {
+              "name": "Mitch Marner"
+            }
+          }
+        ],
+        "defense": [
+          {
+            "ld": {
+              "name": "Morgan Rielly"
+            },
+            "rd": {
+              "name": "Jake McCabe"
+            }
+          },
+          {
+            "ld": {
+              "name": "Chris Tanev"
+            },
+            "rd": {
+              "name": "Oliver Ekman-Larsson"
+            }
+          }
+        ],
+        "goalies": [
+          {
+            "name": "Anthony Stolarz",
+            "role": "starter"
+          },
+          {
+            "name": "Joseph Woll",
+            "role": "backup"
+          }
+        ]
+      }
+    }
+  }
+}

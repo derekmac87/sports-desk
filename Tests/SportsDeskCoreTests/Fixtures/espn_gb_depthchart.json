@@ -1,0 +1,350 @@
+{
+  "depthchart": [
+    {
+      "id": "15",
+      "name": "Base 3-4 D",
+      "positions": {
+        "lde": {
+          "position": {
+            "abbreviation": "LDE",
+            "displayName": "Left Defensive End",
+            "id": "11",
+            "leaf": true,
+            "name": "Left Defensive End",
+            "parent": {
+              "abbreviation": "DE",
+              "displayName": "Defensive End",
+              "id": "31",
+              "leaf": true,
+              "name": "Defensive End"
+            }
+          },
+          "athletes": [
+            {
+              "displayName": "Karl Brooks",
+              "id": "4373423",
+              "injuries": [],
+              "shortName": "K. Brooks"
+            }
+          ]
+        },
+        "nt": {
+          "position": {
+            "abbreviation": "NT",
+            "displayName": "Nose Tackle",
+            "id": "12",
+            "leaf": true,
+            "name": "Nose Tackle",
+            "parent": {
+              "abbreviation": "DT",
+              "displayName": "Defensive Tackle",
+              "id": "32",
+              "leaf": true,
+              "name": "Defensive Tackle"
+            }
+          },
+          "athletes": [
+            {
+              "displayName": "Chris McClellan",
+              "id": "4820574",
+              "injuries": [],
+              "shortName": "C. McClellan"
+            }
+          ]
+        },
+        "rde": {
+          "position": {
+            "abbreviation": "RDE",
+            "displayName": "Right Defensive End",
+            "id": "13",
+            "leaf": true,
+            "name": "Right Defensive End",
+            "parent": {
+              "abbreviation": "DE",
+              "displayName": "Defensive End",
+              "id": "31",
+              "leaf": true,
+              "name": "Defensive End"
+            }
+          },
+          "athletes": [
+            {
+              "displayName": "Devonte Wyatt",
+              "id": "4361791",
+              "injuries": [],
+              "shortName": "D. Wyatt"
+            }
+          ]
+        },
+        "wlb": {
+          "position": {
+            "abbreviation": "WLB",
+            "displayName": "Weakside Linebacker",
+            "id": "26",
+            "leaf": true,
+            "name": "Weakside Linebacker  ",
+            "parent": {
+              "abbreviation": "LB",
+              "displayName": "Linebacker",
+              "id": "30",
+              "leaf": true,
+              "name": "Linebacker"
+            }
+          },
+          "athletes": [
+            {
+              "displayName": "Lukas Van Ness",
+              "id": "4686906",
+              "injuries": [],
+              "shortName": "L. Van Ness"
+            }
+          ]
+        },
+        "lilb": {
+          "position": {
+            "abbreviation": "LILB",
+            "displayName": "Left Inside Linebacker",
+            "id": "15",
+            "leaf": true,
+            "name": "Left Inside Linebacker  ",
+            "parent": {
+              "abbreviation": "LB",
+              "displayName": "Linebacker",
+              "id": "30",
+              "leaf": true,
+              "name": "Linebacker"
+            }
+          },
+          "athletes": [
+            {
+              "displayName": "Zaire Franklin",
+              "id": "3124005",
+              "injuries": [
+                {
+                  "date": "2026-10-23T22:08Z",
+                  "longComment": "Head coach Mike LaFleur told reporters Friday that Franklin injured his shin on a collision during Thursday's practice, and the injury is severe enough for the veteran linebacker to miss his first game of the 2026 season. He's played every defensive snap in five of six games, and that workload will likely fall on Isaiah McDuffie or Nick Niemann for Sunday's NFC North tilt. Franklin's next chance to play is Week 8 against the Panthers on Thursday.",
+                  "shortComment": "Franklin (shin) has been ruled out ahead of Sunday's game against the Lions, Weston Hodkiewicz of the Packers' official site reports.",
+                  "status": "Out",
+                  "type": {
+                    "abbreviation": "O",
+                    "description": "out",
+                    "id": "4",
+                    "name": "INJURY_STATUS_OUT"
+                  }
+                }
+              ],
+              "shortName": "Z. Franklin"
+            }
+          ]
+        },
+        "rilb": {
+          "position": {
+            "abbreviation": "RILB",
+            "displayName": "Right Inside Linebacker",
+            "id": "16",
+            "leaf": true,
+            "name": "Right Inside Linebacker",
+            "parent": {
+              "abbreviation": "LB",
+              "displayName": "Linebacker",
+              "id": "30",
+              "leaf": true,
+              "name": "Linebacker"
+            }
+          },
+          "athletes": [
+            {
+              "displayName": "Ty'Ron Hopper",
+              "id": "4567406",
+              "injuries": [],
+              "shortName": "T. Hopper"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "21",
+      "name": "3WR 1TE",
+      "positions": {
+        "wr1": {
+          "position": {
+            "abbreviation": "WR",
+            "displayName": "Wide Receiver",
+            "id": "1",
+            "leaf": true,
+            "name": "Wide Receiver",
+            "parent": {
+              "abbreviation": "OFF",
+              "displayName": "Offense",
+              "id": "70",
+              "leaf": false,
+              "name": "Offense"
+            }
+          },
+          "athletes": [
+            {
+              "displayName": "Christian Watson",
+              "id": "4248528",
+              "injuries": [],
+              "shortName": "C. Watson"
+            }
+          ]
+        },
+        "wr2": {
+          "position": {
+            "abbreviation": "WR",
+            "displayName": "Wide Receiver",
+            "id": "1",
+            "leaf": true,
+            "name": "Wide Receiver",
+            "parent": {
+              "abbreviation": "OFF",
+              "displayName": "Offense",
+              "id": "70",
+              "leaf": false,
+              "name": "Offense"
+            }
+          },
+          "athletes": [
+            {
+              "displayName": "Matthew Golden",
+              "id": "4701936",
+              "injuries": [],
+              "shortName": "M. Golden"
+            }
+          ]
+        },
+        "wr3": {
+          "position": {
+            "abbreviation": "WR",
+            "displayName": "Wide Receiver",
+            "id": "1",
+            "leaf": true,
+            "name": "Wide Receiver",
+            "parent": {
+              "abbreviation": "OFF",
+              "displayName": "Offense",
+              "id": "70",
+              "leaf": false,
+              "name": "Offense"
+            }
+          },
+          "athletes": [
+            {
+              "displayName": "Savion Williams",
+              "id": "4431487",
+              "injuries": [],
+              "shortName": "S. Williams"
+            }
+          ]
+        },
+        "lt": {
+          "position": {
+            "abbreviation": "LT",
+            "displayName": "Left Tackle",
+            "id": "2",
+            "leaf": true,
+            "name": "Left Tackle  ",
+            "parent": {
+              "abbreviation": "OT",
+              "displayName": "Offensive Tackle",
+              "id": "46",
+              "leaf": true,
+              "name": "Offensive Tackle"
+            }
+          },
+          "athletes": [
+            {
+              "displayName": "Jordan Morgan",
+              "id": "3821571",
+              "injuries": [],
+              "shortName": "J. Morgan"
+            }
+          ]
+        },
+        "lg": {
+          "position": {
+            "abbreviation": "LG",
+            "displayName": "Left Guard",
+            "id": "3",
+            "leaf": true,
+            "name": "Left Guard  ",
+            "parent": {
+              "abbreviation": "OG",
+              "displayName": "Offensive Guard",
+              "id": "47",
+              "leaf": true,
+              "name": "Offensive Guard"
+            }
+          },
+          "athletes": [
+            {
+              "displayName": "Aaron Banks",
+              "id": "4242390",
+              "injuries": [
+                {
+                  "date": "2026-10-24T02:10Z",
+                  "longComment": "Banks has missed the Packers' last four games while working through toe and knee injuries, but he has a chance to make his return for Sunday's NFC North tilt. Laken Tomlinson would continue to start at left guard if Banks cannot play.",
+                  "shortComment": "Banks (knee/toe) is listed as questionable for Sunday's game against the Lions, Wes Hodkiewicz of the Packers' official site reports.",
+                  "status": "Questionable",
+                  "type": {
+                    "abbreviation": "Q",
+                    "description": "questionable",
+                    "id": "2",
+                    "name": "INJURY_STATUS_QUESTIONABLE"
+                  }
+                }
+              ],
+              "shortName": "A. Banks"
+            }
+          ]
+        },
+        "c": {
+          "position": {
+            "abbreviation": "C",
+            "displayName": "Center",
+            "id": "4",
+            "leaf": true,
+            "name": "Center",
+            "parent": {
+              "abbreviation": "OFF",
+              "displayName": "Offense",
+              "id": "70",
+              "leaf": false,
+              "name": "Offense"
+            }
+          },
+          "athletes": [
+            {
+              "displayName": "Sean Rhyan",
+              "id": "4426411",
+              "injuries": [],
+              "shortName": "S. Rhyan"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "season": {
+    "name": "Regular Season",
+    "type": 2,
+    "year": 2026
+  },
+  "status": "success",
+  "team": {
+    "abbreviation": "GB",
+    "clubhouse": "https://www.espn.com/nfl/team/_/name/gb/green-bay-packers",
+    "color": "204e32",
+    "displayName": "Green Bay Packers",
+    "id": "9",
+    "location": "Green Bay",
+    "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/gb.png",
+    "name": "Packers",
+    "recordSummary": "4-2",
+    "seasonSummary": "2026",
+    "standingSummary": "3rd in NFC North"
+  },
+  "timestamp": "2026-10-24T17:34:43Z"
+}

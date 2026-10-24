@@ -1,0 +1,428 @@
+{
+  "id": 2026020176,
+  "season": 20262027,
+  "gameType": 2,
+  "limitedScoring": false,
+  "gameDate": "2026-10-24",
+  "venue": {
+    "default": "Rogers Place"
+  },
+  "venueLocation": {
+    "default": "Edmonton"
+  },
+  "startTimeUTC": "2026-10-24T23:00:00Z",
+  "easternUTCOffset": "-04:00",
+  "venueUTCOffset": "-06:00",
+  "venueTimezone": "America/Edmonton",
+  "tvBroadcasts": [
+    {
+      "id": 282,
+      "market": "N",
+      "countryCode": "CA",
+      "network": "SN",
+      "sequenceNumber": 21
+    }
+  ],
+  "gameState": "FUT",
+  "gameScheduleState": "OK",
+  "awayTeam": {
+    "id": 10,
+    "commonName": {
+      "default": "Maple Leafs"
+    },
+    "abbrev": "TOR",
+    "placeName": {
+      "default": "Toronto"
+    },
+    "placeNameWithPreposition": {
+      "default": "Toronto",
+      "fr": "de Toronto"
+    },
+    "logo": "https://assets.nhle.com/logos/nhl/svg/TOR_light.svg",
+    "darkLogo": "https://assets.nhle.com/logos/nhl/svg/TOR_dark.svg",
+    "record": "6-4-2"
+  },
+  "homeTeam": {
+    "id": 22,
+    "commonName": {
+      "default": "Oilers"
+    },
+    "abbrev": "EDM",
+    "placeName": {
+      "default": "Edmonton"
+    },
+    "placeNameWithPreposition": {
+      "default": "Edmonton",
+      "fr": "d'Edmonton"
+    },
+    "logo": "https://assets.nhle.com/logos/nhl/svg/EDM_light.svg",
+    "darkLogo": "https://assets.nhle.com/logos/nhl/svg/EDM_dark.svg",
+    "record": "8-1-1"
+  },
+  "shootoutInUse": true,
+  "maxPeriods": 5,
+  "regPeriods": 3,
+  "otInUse": true,
+  "tiesInUse": false,
+  "ticketsLink": "https://www.ticketmaster.ca/event/11006513A5FCA483?brand=nhl&wt.mc_id=NHL_LEAGUE_EDM_GAMECENTER_PREVIEW_GM6&utm_source=NHL.com&utm_medium=client_PM&utm_campaign=NHL_LEAGUE_EDM&utm_content=GAMECENTER_PREVIEW_GM6",
+  "ticketsLinkFr": "https://www.ticketmaster.ca/event/11006513A5FCA483?brand=nhl&wt.mc_id=NHL_LEAGUE_EDM_GAMECENTER_PREVIEW_GM6&utm_source=NHL.com&utm_medium=client_PM&utm_campaign=NHL_LEAGUE_EDM&utm_content=GAMECENTER_PREVIEW_GM6",
+  "matchup": {
+    "season": 20262027,
+    "gameType": 2,
+    "skaterComparison": {
+      "contextLabel": "last_5_games",
+      "contextSeason": 20262027,
+      "leaders": [
+        {
+          "category": "points",
+          "awayLeader": {
+            "playerId": 8479318,
+            "name": {
+              "default": "A. Matthews"
+            },
+            "firstName": {
+              "default": "Auston"
+            },
+            "lastName": {
+              "default": "Matthews"
+            },
+            "sweaterNumber": 34,
+            "positionCode": "C",
+            "headshot": "https://assets.nhle.com/mugs/nhl/20262027/TOR/8479318.png",
+            "value": 6
+          },
+          "homeLeader": {
+            "playerId": 8478402,
+            "name": {
+              "default": "C. McDavid"
+            },
+            "firstName": {
+              "default": "Connor"
+            },
+            "lastName": {
+              "default": "McDavid"
+            },
+            "sweaterNumber": 97,
+            "positionCode": "C",
+            "headshot": "https://assets.nhle.com/mugs/nhl/20262027/EDM/8478402.png",
+            "value": 18
+          }
+        },
+        {
+          "category": "goals",
+          "awayLeader": {
+            "playerId": 8480893,
+            "name": {
+              "default": "K. Marchenko",
+              "cs": "K. Mar\u010denko",
+              "fi": "K. Martshenko",
+              "sk": "K. Mar\u010denko"
+            },
+            "firstName": {
+              "default": "Kirill"
+            },
+            "lastName": {
+              "default": "Marchenko",
+              "cs": "Mar\u010denko",
+              "fi": "Martshenko",
+              "sk": "Mar\u010denko"
+            },
+            "sweaterNumber": 86,
+            "positionCode": "R",
+            "headshot": "https://assets.nhle.com/mugs/nhl/20262027/TOR/8480893.png",
+            "value": 5
+          },
+          "homeLeader": {
+            "playerId": 8477934,
+            "name": {
+              "default": "L. Draisaitl"
+            },
+            "firstName": {
+              "default": "Leon"
+            },
+            "lastName": {
+              "default": "Draisaitl"
+            },
+            "sweaterNumber": 29,
+            "positionCode": "C",
+            "headshot": "https://assets.nhle.com/mugs/nhl/20262027/EDM/8477934.png",
+            "value": 7
+          }
+        }
+      ]
+    },
+    "goalieComparison": {
+      "contextLabel": "regular_season",
+      "contextSeason": 20262027,
+      "homeTeam": {
+        "teamTotals": {
+          "record": "8-1-1",
+          "gaa": 3.2,
+          "savePctg": 0.879699,
+          "shutouts": 0,
+          "gamesPlayed": 10
+        },
+        "leaders": [
+          {
+            "playerId": 8482221,
+            "name": {
+              "default": "D. Levi"
+            },
+            "firstName": {
+              "default": "Devon"
+            },
+            "lastName": {
+              "default": "Levi"
+            },
+            "sweaterNumber": 27,
+            "headshot": "https://assets.nhle.com/mugs/nhl/20262027/EDM/8482221.png",
+            "positionCode": "G",
+            "gamesPlayed": 7,
+            "seasonPoints": 12,
+            "record": "6-1-0",
+            "gaa": 3.11,
+            "savePctg": 0.887,
+            "shutouts": 0
+          },
+          {
+            "playerId": 8477465,
+            "name": {
+              "default": "T. Jarry"
+            },
+            "firstName": {
+              "default": "Tristan"
+            },
+            "lastName": {
+              "default": "Jarry"
+            },
+            "sweaterNumber": 35,
+            "headshot": "https://assets.nhle.com/mugs/nhl/20262027/EDM/8477465.png",
+            "positionCode": "G",
+            "gamesPlayed": 3,
+            "seasonPoints": 5,
+            "record": "2-0-1",
+            "gaa": 2.97,
+            "savePctg": 0.873,
+            "shutouts": 0
+          }
+        ]
+      },
+      "awayTeam": {
+        "teamTotals": {
+          "record": "6-4-2",
+          "gaa": 3.166667,
+          "savePctg": 0.893855,
+          "shutouts": 0,
+          "gamesPlayed": 12
+        },
+        "leaders": [
+          {
+            "playerId": 8475683,
+            "name": {
+              "default": "S. Bobrovsky",
+              "cs": "S. Bobrovskij",
+              "fi": "S. Bobrovski",
+              "sk": "S. Bobrovskij"
+            },
+            "firstName": {
+              "default": "Sergei",
+              "cs": "Sergej",
+              "sk": "Sergej"
+            },
+            "lastName": {
+              "default": "Bobrovsky",
+              "cs": "Bobrovskij",
+              "fi": "Bobrovski",
+              "sk": "Bobrovskij"
+            },
+            "sweaterNumber": 72,
+            "headshot": "https://assets.nhle.com/mugs/nhl/20262027/TOR/8475683.png",
+            "positionCode": "G",
+            "gamesPlayed": 8,
+            "seasonPoints": 8,
+            "record": "3-3-2",
+            "gaa": 3.1,
+            "savePctg": 0.895,
+            "shutouts": 0
+          },
+          {
+            "playerId": 8476932,
+            "name": {
+              "default": "A. Stolarz"
+            },
+            "firstName": {
+              "default": "Anthony"
+            },
+            "lastName": {
+              "default": "Stolarz"
+            },
+            "sweaterNumber": 41,
+            "headshot": "https://assets.nhle.com/mugs/nhl/20262027/TOR/8476932.png",
+            "positionCode": "G",
+            "gamesPlayed": 4,
+            "seasonPoints": 6,
+            "record": "3-1-0",
+            "gaa": 2.99,
+            "savePctg": 0.898,
+            "shutouts": 0
+          }
+        ]
+      }
+    },
+    "skaterSeasonStats": {
+      "contextLabel": "regular_season",
+      "contextSeason": 20262027,
+      "skaters": [
+        {
+          "playerId": 8480803,
+          "teamId": 22,
+          "sweaterNumber": 2,
+          "name": {
+            "default": "E. Bouchard"
+          },
+          "position": "D",
+          "gamesPlayed": 10,
+          "goals": 7,
+          "assists": 12,
+          "points": 19,
+          "plusMinus": 16,
+          "pim": 0,
+          "avgPoints": 1.9,
+          "avgTimeOnIce": "26:01",
+          "gameWinningGoals": 2,
+          "shots": 30,
+          "shootingPctg": 0.233333,
+          "faceoffWinningPctg": 0.0,
+          "powerPlayGoals": 1,
+          "blockedShots": 7,
+          "hits": 5
+        },
+        {
+          "playerId": 8483565,
+          "teamId": 10,
+          "sweaterNumber": 3,
+          "name": {
+            "default": "N. Blankenburg"
+          },
+          "position": "D",
+          "gamesPlayed": 6,
+          "goals": 1,
+          "assists": 0,
+          "points": 1,
+          "plusMinus": -3,
+          "pim": 0,
+          "avgPoints": 0.17,
+          "avgTimeOnIce": "13:05",
+          "gameWinningGoals": 0,
+          "shots": 6,
+          "shootingPctg": 0.166667,
+          "faceoffWinningPctg": 0.0,
+          "powerPlayGoals": 0,
+          "blockedShots": 2,
+          "hits": 6
+        }
+      ]
+    },
+    "goalieSeasonStats": {
+      "contextLabel": "regular_season",
+      "contextSeason": 20262027,
+      "goalies": [
+        {
+          "playerId": 8477465,
+          "teamId": 22,
+          "sweaterNumber": 35,
+          "name": {
+            "default": "T. Jarry"
+          },
+          "gamesPlayed": 3,
+          "wins": 2,
+          "losses": 0,
+          "otLosses": 1,
+          "shotsAgainst": 71,
+          "goalsAgainst": 9,
+          "goalsAgainstAvg": 2.974387,
+          "savePctg": 0.873239,
+          "shutouts": 0,
+          "saves": 62,
+          "toi": "181:33"
+        },
+        {
+          "playerId": 8482221,
+          "teamId": 22,
+          "sweaterNumber": 27,
+          "name": {
+            "default": "D. Levi"
+          },
+          "gamesPlayed": 7,
+          "wins": 6,
+          "losses": 1,
+          "otLosses": 0,
+          "shotsAgainst": 194,
+          "goalsAgainst": 22,
+          "goalsAgainstAvg": 3.108198,
+          "savePctg": 0.886598,
+          "shutouts": 0,
+          "saves": 172,
+          "toi": "424:41"
+        },
+        {
+          "playerId": 8475883,
+          "teamId": 22,
+          "sweaterNumber": 30,
+          "name": {
+            "default": "F. Andersen"
+          }
+        },
+        {
+          "playerId": 8477035,
+          "teamId": 22,
+          "sweaterNumber": 90,
+          "name": {
+            "default": "M. Tomkins"
+          }
+        },
+        {
+          "playerId": 8476932,
+          "teamId": 10,
+          "sweaterNumber": 41,
+          "name": {
+            "default": "A. Stolarz"
+          },
+          "gamesPlayed": 4,
+          "wins": 3,
+          "losses": 1,
+          "otLosses": 0,
+          "shotsAgainst": 118,
+          "goalsAgainst": 12,
+          "goalsAgainstAvg": 2.992933,
+          "savePctg": 0.898305,
+          "shutouts": 0,
+          "saves": 106,
+          "toi": "240:34"
+        },
+        {
+          "playerId": 8475683,
+          "teamId": 10,
+          "sweaterNumber": 72,
+          "name": {
+            "default": "S. Bobrovsky",
+            "cs": "S. Bobrovskij",
+            "fi": "S. Bobrovski",
+            "sk": "S. Bobrovskij"
+          },
+          "gamesPlayed": 8,
+          "wins": 3,
+          "losses": 3,
+          "otLosses": 2,
+          "shotsAgainst": 239,
+          "goalsAgainst": 25,
+          "goalsAgainstAvg": 3.095975,
+          "savePctg": 0.895397,
+          "shutouts": 0,
+          "saves": 214,
+          "toi": "484:30"
+        }
+      ]
+    }
+  }
+}

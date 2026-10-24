@@ -1,0 +1,1140 @@
+{
+  "header": {
+    "id": "401873020",
+    "uid": "s:20~l:28~e:401873020",
+    "season": {
+      "year": 2026,
+      "current": true,
+      "type": 2
+    },
+    "timeValid": true,
+    "competitions": [
+      {
+        "id": "401873020",
+        "uid": "s:20~l:28~e:401873020~c:401873020",
+        "date": "2026-10-25T20:25Z",
+        "neutralSite": false,
+        "conferenceCompetition": false,
+        "boxscoreAvailable": false,
+        "commentaryAvailable": false,
+        "liveAvailable": false,
+        "onWatchESPN": false,
+        "recent": false,
+        "wallclockAvailable": false,
+        "boxscoreSource": "none",
+        "playByPlaySource": "none",
+        "competitors": [
+          {
+            "id": "8",
+            "uid": "s:20~l:28~t:8",
+            "order": 0,
+            "homeAway": "home",
+            "team": {
+              "id": "8",
+              "guid": "56caffee-178d-f6f2-a076-b277486b8c32",
+              "uid": "s:20~l:28~t:8",
+              "location": "Detroit",
+              "name": "Lions",
+              "nickname": "Lions",
+              "abbreviation": "DET",
+              "displayName": "Detroit Lions",
+              "color": "0076b6",
+              "alternateColor": "bbbbbb",
+              "logos": [
+                {
+                  "href": "https://a.espncdn.com/i/teamlogos/nfl/500/det.png",
+                  "width": 500,
+                  "height": 500,
+                  "alt": "",
+                  "rel": [
+                    "full",
+                    "default"
+                  ],
+                  "lastUpdated": "2024-06-25T18:48Z"
+                },
+                {
+                  "href": "https://a.espncdn.com/i/teamlogos/nfl/500-dark/det.png",
+                  "width": 500,
+                  "height": 500,
+                  "alt": "",
+                  "rel": [
+                    "full",
+                    "dark"
+                  ],
+                  "lastUpdated": "2024-06-25T18:48Z"
+                },
+                {
+                  "href": "https://a.espncdn.com/i/teamlogos/nfl/500/scoreboard/det.png",
+                  "width": 500,
+                  "height": 500,
+                  "alt": "",
+                  "rel": [
+                    "full",
+                    "scoreboard"
+                  ],
+                  "lastUpdated": "2024-06-25T18:48Z"
+                },
+                {
+                  "href": "https://a.espncdn.com/i/teamlogos/nfl/500-dark/scoreboard/det.png",
+                  "width": 500,
+                  "height": 500,
+                  "alt": "",
+                  "rel": [
+                    "full",
+                    "scoreboard",
+                    "dark"
+                  ],
+                  "lastUpdated": "2024-06-25T18:48Z"
+                },
+                {
+                  "href": "https://a.espncdn.com/guid/56caffee-178d-f6f2-a076-b277486b8c32/logos/grayscale.png",
+                  "width": 500,
+                  "height": 500,
+                  "alt": "",
+                  "rel": [
+                    "full",
+                    "grayscale"
+                  ],
+                  "lastUpdated": "2026-03-31T12:53Z"
+                },
+                {
+                  "href": "https://a.espncdn.com/guid/56caffee-178d-f6f2-a076-b277486b8c32/logos/primary_logo_on_white_color.png",
+                  "width": 4096,
+                  "height": 4096,
+                  "alt": "",
+                  "rel": [
+                    "full",
+                    "primary_logo_on_white_color"
+                  ],
+                  "lastUpdated": "2026-07-22T20:30Z"
+                },
+                {
+                  "href": "https://a.espncdn.com/guid/56caffee-178d-f6f2-a076-b277486b8c32/logos/primary_logo_on_black_color.png",
+                  "width": 4096,
+                  "height": 4096,
+                  "alt": "",
+                  "rel": [
+                    "full",
+                    "primary_logo_on_black_color"
+                  ],
+                  "lastUpdated": "2026-07-22T20:30Z"
+                },
+                {
+                  "href": "https://a.espncdn.com/guid/56caffee-178d-f6f2-a076-b277486b8c32/logos/primary_logo_on_primary_color.png",
+                  "width": 4096,
+                  "height": 4096,
+                  "alt": "",
+                  "rel": [
+                    "full",
+                    "primary_logo_on_primary_color"
+                  ],
+                  "lastUpdated": "2026-07-22T20:30Z"
+                },
+                {
+                  "href": "https://a.espncdn.com/guid/56caffee-178d-f6f2-a076-b277486b8c32/logos/primary_logo_on_secondary_color.png",
+                  "width": 4096,
+                  "height": 4096,
+                  "alt": "",
+                  "rel": [
+                    "full",
+                    "primary_logo_on_secondary_color"
+                  ],
+                  "lastUpdated": "2026-07-22T20:30Z"
+                },
+                {
+                  "href": "https://a.espncdn.com/guid/56caffee-178d-f6f2-a076-b277486b8c32/logos/primary_logo_black.png",
+                  "width": 4096,
+                  "height": 4096,
+                  "alt": "",
+                  "rel": [
+                    "full",
+                    "primary_logo_black"
+                  ],
+                  "lastUpdated": "2026-07-22T20:30Z"
+                },
+                {
+                  "href": "https://a.espncdn.com/guid/56caffee-178d-f6f2-a076-b277486b8c32/logos/primary_logo_white.png",
+                  "width": 4096,
+                  "height": 4096,
+                  "alt": "",
+                  "rel": [
+                    "full",
+                    "primary_logo_white"
+                  ],
+                  "lastUpdated": "2026-07-22T20:30Z"
+                },
+                {
+                  "href": "https://a.espncdn.com/guid/56caffee-178d-f6f2-a076-b277486b8c32/logos/secondary_logo_on_white_color.png",
+                  "width": 4096,
+                  "height": 4096,
+                  "alt": "",
+                  "rel": [
+                    "full",
+                    "secondary_logo_on_white_color"
+                  ],
+                  "lastUpdated": "2026-07-22T20:30Z"
+                },
+                {
+                  "href": "https://a.espncdn.com/guid/56caffee-178d-f6f2-a076-b277486b8c32/logos/secondary_logo_on_black_color.png",
+                  "width": 4096,
+                  "height": 4096,
+                  "alt": "",
+                  "rel": [
+                    "full",
+                    "secondary_logo_on_black_color"
+                  ],
+                  "lastUpdated": "2026-07-22T20:30Z"
+                },
+                {
+                  "href": "https://a.espncdn.com/guid/56caffee-178d-f6f2-a076-b277486b8c32/logos/secondary_logo_on_primary_color.png",
+                  "width": 4096,
+                  "height": 4096,
+                  "alt": "",
+                  "rel": [
+                    "full",
+                    "secondary_logo_on_primary_color"
+                  ],
+                  "lastUpdated": "2026-07-22T20:30Z"
+                },
+                {
+                  "href": "https://a.espncdn.com/guid/56caffee-178d-f6f2-a076-b277486b8c32/logos/secondary_logo_on_secondary_color.png",
+                  "width": 4096,
+                  "height": 4096,
+                  "alt": "",
+                  "rel": [
+                    "full",
+                    "secondary_logo_on_secondary_color"
+                  ],
+                  "lastUpdated": "2026-07-22T20:30Z"
+                },
+                {
+                  "href": "https://a.espncdn.com/guid/56caffee-178d-f6f2-a076-b277486b8c32/logos/secondary_logo_black.png",
+                  "width": 4096,
+                  "height": 4096,
+                  "alt": "",
+                  "rel": [
+                    "full",
+                    "secondary_logo_black"
+                  ],
+                  "lastUpdated": "2026-07-22T20:30Z"
+                },
+                {
+                  "href": "https://a.espncdn.com/guid/56caffee-178d-f6f2-a076-b277486b8c32/logos/secondary_logo_white.png",
+                  "width": 4096,
+                  "height": 4096,
+                  "alt": "",
+                  "rel": [
+                    "full",
+                    "secondary_logo_white"
+                  ],
+                  "lastUpdated": "2026-07-22T20:30Z"
+                }
+              ],
+              "links": [
+                {
+                  "rel": [
+                    "clubhouse",
+                    "desktop",
+                    "team"
+                  ],
+                  "href": "https://www.espn.com/nfl/team/_/name/det/detroit-lions",
+                  "text": "Clubhouse"
+                }
+              ]
+            },
+            "record": [
+              {
+                "type": "total",
+                "summary": "3-2",
+                "displayValue": "3-2"
+              },
+              {
+                "type": "home",
+                "summary": "2-0",
+                "displayValue": "2-0"
+              },
+              {
+                "type": "vsconf",
+                "summary": "2-1",
+                "displayValue": "2-1"
+              }
+            ],
+            "possession": false
+          },
+          {
+            "id": "9",
+            "uid": "s:20~l:28~t:9",
+            "order": 1,
+            "homeAway": "away",
+            "team": {
+              "id": "9",
+              "guid": "06cd3bcf-7a86-53d4-28e7-aa049dd36261",
+              "uid": "s:20~l:28~t:9",
+              "location": "Green Bay",
+              "name": "Packers",
+              "nickname": "Packers",
+              "abbreviation": "GB",
+              "displayName": "Green Bay Packers",
+              "color": "204e32",
+              "alternateColor": "ffb612",
+              "logos": [
+                {
+                  "href": "https://a.espncdn.com/i/teamlogos/nfl/500/gb.png",
+                  "width": 500,
+                  "height": 500,
+                  "alt": "",
+                  "rel": [
+                    "full",
+                    "default"
+                  ],
+                  "lastUpdated": "2024-10-28T18:22Z"
+                },
+                {
+                  "href": "https://a.espncdn.com/i/teamlogos/nfl/500-dark/gb.png",
+                  "width": 500,
+                  "height": 500,
+                  "alt": "",
+                  "rel": [
+                    "full",
+                    "dark"
+                  ],
+                  "lastUpdated": "2024-06-25T18:49Z"
+                },
+                {
+                  "href": "https://a.espncdn.com/i/teamlogos/nfl/500/scoreboard/gb.png",
+                  "width": 500,
+                  "height": 500,
+                  "alt": "",
+                  "rel": [
+                    "full",
+                    "scoreboard"
+                  ],
+                  "lastUpdated": "2024-06-25T18:49Z"
+                },
+                {
+                  "href": "https://a.espncdn.com/i/teamlogos/nfl/500-dark/scoreboard/gb.png",
+                  "width": 500,
+                  "height": 500,
+                  "alt": "",
+                  "rel": [
+                    "full",
+                    "scoreboard",
+                    "dark"
+                  ],
+                  "lastUpdated": "2024-06-25T18:49Z"
+                },
+                {
+                  "href": "https://a.espncdn.com/guid/06cd3bcf-7a86-53d4-28e7-aa049dd36261/logos/grayscale.png",
+                  "width": 500,
+                  "height": 500,
+                  "alt": "",
+                  "rel": [
+                    "full",
+                    "grayscale"
+                  ],
+                  "lastUpdated": "2026-03-31T12:53Z"
+                },
+                {
+                  "href": "https://a.espncdn.com/guid/06cd3bcf-7a86-53d4-28e7-aa049dd36261/logos/primary_logo_on_white_color.png",
+                  "width": 4096,
+                  "height": 4096,
+                  "alt": "",
+                  "rel": [
+                    "full",
+                    "primary_logo_on_white_color"
+                  ],
+                  "lastUpdated": "2026-07-22T20:30Z"
+                },
+                {
+                  "href": "https://a.espncdn.com/guid/06cd3bcf-7a86-53d4-28e7-aa049dd36261/logos/primary_logo_on_black_color.png",
+                  "width": 4096,
+                  "height": 4096,
+                  "alt": "",
+                  "rel": [
+                    "full",
+                    "primary_logo_on_black_color"
+                  ],
+                  "lastUpdated": "2026-07-22T20:30Z"
+                },
+                {
+                  "href": "https://a.espncdn.com/guid/06cd3bcf-7a86-53d4-28e7-aa049dd36261/logos/primary_logo_on_primary_color.png",
+                  "width": 4096,
+                  "height": 4096,
+                  "alt": "",
+                  "rel": [
+                    "full",
+                    "primary_logo_on_primary_color"
+                  ],
+                  "lastUpdated": "2026-07-22T20:30Z"
+                },
+                {
+                  "href": "https://a.espncdn.com/guid/06cd3bcf-7a86-53d4-28e7-aa049dd36261/logos/primary_logo_on_secondary_color.png",
+                  "width": 4096,
+                  "height": 4096,
+                  "alt": "",
+                  "rel": [
+                    "full",
+                    "primary_logo_on_secondary_color"
+                  ],
+                  "lastUpdated": "2026-07-22T20:30Z"
+                },
+                {
+                  "href": "https://a.espncdn.com/guid/06cd3bcf-7a86-53d4-28e7-aa049dd36261/logos/primary_logo_black.png",
+                  "width": 4096,
+                  "height": 4096,
+                  "alt": "",
+                  "rel": [
+                    "full",
+                    "primary_logo_black"
+                  ],
+                  "lastUpdated": "2026-07-22T20:30Z"
+                },
+                {
+                  "href": "https://a.espncdn.com/guid/06cd3bcf-7a86-53d4-28e7-aa049dd36261/logos/primary_logo_white.png",
+                  "width": 4096,
+                  "height": 4096,
+                  "alt": "",
+                  "rel": [
+                    "full",
+                    "primary_logo_white"
+                  ],
+                  "lastUpdated": "2026-07-22T20:30Z"
+                },
+                {
+                  "href": "https://a.espncdn.com/guid/06cd3bcf-7a86-53d4-28e7-aa049dd36261/logos/secondary_logo_on_white_color.png",
+                  "width": 4096,
+                  "height": 4096,
+                  "alt": "",
+                  "rel": [
+                    "full",
+                    "secondary_logo_on_white_color"
+                  ],
+                  "lastUpdated": "2026-07-22T20:30Z"
+                },
+                {
+                  "href": "https://a.espncdn.com/guid/06cd3bcf-7a86-53d4-28e7-aa049dd36261/logos/secondary_logo_on_black_color.png",
+                  "width": 4096,
+                  "height": 4096,
+                  "alt": "",
+                  "rel": [
+                    "full",
+                    "secondary_logo_on_black_color"
+                  ],
+                  "lastUpdated": "2026-07-22T20:30Z"
+                },
+                {
+                  "href": "https://a.espncdn.com/guid/06cd3bcf-7a86-53d4-28e7-aa049dd36261/logos/secondary_logo_on_primary_color.png",
+                  "width": 4096,
+                  "height": 4096,
+                  "alt": "",
+                  "rel": [
+                    "full",
+                    "secondary_logo_on_primary_color"
+                  ],
+                  "lastUpdated": "2026-07-22T20:30Z"
+                },
+                {
+                  "href": "https://a.espncdn.com/guid/06cd3bcf-7a86-53d4-28e7-aa049dd36261/logos/secondary_logo_on_secondary_color.png",
+                  "width": 4096,
+                  "height": 4096,
+                  "alt": "",
+                  "rel": [
+                    "full",
+                    "secondary_logo_on_secondary_color"
+                  ],
+                  "lastUpdated": "2026-07-22T20:30Z"
+                },
+                {
+                  "href": "https://a.espncdn.com/guid/06cd3bcf-7a86-53d4-28e7-aa049dd36261/logos/secondary_logo_black.png",
+                  "width": 4096,
+                  "height": 4096,
+                  "alt": "",
+                  "rel": [
+                    "full",
+                    "secondary_logo_black"
+                  ],
+                  "lastUpdated": "2026-07-22T20:30Z"
+                },
+                {
+                  "href": "https://a.espncdn.com/guid/06cd3bcf-7a86-53d4-28e7-aa049dd36261/logos/secondary_logo_white.png",
+                  "width": 4096,
+                  "height": 4096,
+                  "alt": "",
+                  "rel": [
+                    "full",
+                    "secondary_logo_white"
+                  ],
+                  "lastUpdated": "2026-07-22T20:30Z"
+                }
+              ],
+              "links": [
+                {
+                  "rel": [
+                    "clubhouse",
+                    "desktop",
+                    "team"
+                  ],
+                  "href": "https://www.espn.com/nfl/team/_/name/gb/green-bay-packers",
+                  "text": "Clubhouse"
+                }
+              ]
+            },
+            "record": [
+              {
+                "type": "total",
+                "summary": "4-2",
+                "displayValue": "4-2"
+              },
+              {
+                "type": "road",
+                "summary": "2-1",
+                "displayValue": "2-1"
+              },
+              {
+                "type": "vsconf",
+                "summary": "3-2",
+                "displayValue": "3-2"
+              }
+            ],
+            "possession": false
+          }
+        ],
+        "status": {
+          "type": {
+            "id": "1",
+            "name": "STATUS_SCHEDULED",
+            "state": "pre",
+            "completed": false,
+            "description": "Scheduled",
+            "detail": "Sun, October 25th at 4:25 PM EDT",
+            "shortDetail": "10/25 - 4:25 PM EDT"
+          },
+          "isTBDFlex": false
+        },
+        "broadcasts": [
+          {
+            "type": {
+              "id": "1",
+              "shortName": "TV"
+            },
+            "market": {
+              "id": "1",
+              "type": "National"
+            },
+            "media": {
+              "shortName": "Fox"
+            },
+            "lang": "en",
+            "region": "us",
+            "isNational": true
+          }
+        ],
+        "boxscoreMinutes": false
+      }
+    ],
+    "links": [
+      {
+        "rel": [
+          "summary",
+          "desktop",
+          "event"
+        ],
+        "href": "https://www.espn.com/nfl/game/_/gameId/401873020/packers-lions",
+        "text": "Gamecast",
+        "shortText": "Summary",
+        "isExternal": false,
+        "isPremium": false
+      },
+      {
+        "rel": [
+          "preview",
+          "desktop",
+          "event"
+        ],
+        "href": "https://www.espn.com/nfl/preview/_/gameId/401873020",
+        "text": "Preview",
+        "shortText": "Preview",
+        "isExternal": false,
+        "isPremium": false
+      },
+      {
+        "rel": [
+          "tickets",
+          "desktop"
+        ],
+        "href": "https://www.vividseats.com/detroit-lions-tickets-detroit-ford-field-3-2-2026/production/6489844?wsUser=717",
+        "text": "Tickets",
+        "shortText": "Tickets",
+        "isExternal": true,
+        "isPremium": false
+      }
+    ],
+    "week": 7,
+    "league": {
+      "id": "28",
+      "uid": "s:20~l:28",
+      "name": "National Football League",
+      "abbreviation": "NFL",
+      "shortName": "NFL",
+      "slug": "nfl",
+      "isTournament": false,
+      "links": [
+        {
+          "rel": [
+            "index",
+            "desktop",
+            "league"
+          ],
+          "href": "https://www.espn.com/nfl/",
+          "text": "Index"
+        },
+        {
+          "rel": [
+            "index",
+            "sportscenter",
+            "app",
+            "league"
+          ],
+          "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:28",
+          "text": "Index"
+        },
+        {
+          "rel": [
+            "schedule",
+            "desktop",
+            "league"
+          ],
+          "href": "https://www.espn.com/nfl/schedule",
+          "text": "Schedule"
+        },
+        {
+          "rel": [
+            "schedule",
+            "sportscenter",
+            "app",
+            "league"
+          ],
+          "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:28&section=scores",
+          "text": "Schedule"
+        },
+        {
+          "rel": [
+            "standings",
+            "desktop",
+            "league"
+          ],
+          "href": "https://www.espn.com/nfl/standings",
+          "text": "Standings"
+        },
+        {
+          "rel": [
+            "standings",
+            "sportscenter",
+            "app",
+            "league"
+          ],
+          "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:28&section=standings",
+          "text": "Standings"
+        },
+        {
+          "rel": [
+            "rankings",
+            "desktop",
+            "league"
+          ],
+          "href": "https://www.espn.com/nfl/powerrankings",
+          "text": "Power Rankings"
+        },
+        {
+          "rel": [
+            "scores",
+            "desktop",
+            "league"
+          ],
+          "href": "https://www.espn.com/nfl/scoreboard",
+          "text": "Scores"
+        },
+        {
+          "rel": [
+            "scores",
+            "sportscenter",
+            "app",
+            "league"
+          ],
+          "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:28&section=scores",
+          "text": "Scores"
+        },
+        {
+          "rel": [
+            "stats",
+            "desktop",
+            "league"
+          ],
+          "href": "https://www.espn.com/nfl/stats",
+          "text": "Stats"
+        },
+        {
+          "rel": [
+            "stats",
+            "sportscenter",
+            "app",
+            "league"
+          ],
+          "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:28&section=stats",
+          "text": "Stats"
+        },
+        {
+          "rel": [
+            "teams",
+            "desktop",
+            "league"
+          ],
+          "href": "https://www.espn.com/nfl/teams",
+          "text": "Teams"
+        },
+        {
+          "rel": [
+            "athletes",
+            "desktop",
+            "league"
+          ],
+          "href": "https://www.espn.com/nfl/players",
+          "text": "Players"
+        },
+        {
+          "rel": [
+            "injuries",
+            "desktop",
+            "league"
+          ],
+          "href": "https://www.espn.com/nfl/injuries",
+          "text": "Injuries"
+        },
+        {
+          "rel": [
+            "odds",
+            "desktop",
+            "league"
+          ],
+          "href": "https://www.espn.com/nfl/odds",
+          "text": "Odds"
+        },
+        {
+          "rel": [
+            "odds",
+            "sportscenter",
+            "app",
+            "league"
+          ],
+          "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:28&section=odds",
+          "text": "Odds"
+        },
+        {
+          "rel": [
+            "playoff-bracket",
+            "desktop",
+            "league"
+          ],
+          "href": "https://www.espn.com/nfl/playoff-bracket",
+          "text": "Bracket"
+        },
+        {
+          "rel": [
+            "playoff-bracket",
+            "sportscenter",
+            "app",
+            "league"
+          ],
+          "href": "sportscenter://x-callback-url/showClubhouse?uid=s:20~l:28&section=bracket",
+          "text": "Bracket"
+        },
+        {
+          "rel": [
+            "freeagency",
+            "desktop",
+            "league"
+          ],
+          "href": "https://insider.espn.com/nfl/freeagency/",
+          "text": "Freeagency"
+        }
+      ],
+      "logos": [
+        {
+          "href": "https://a.espncdn.com/i/teamlogos/leagues/500/nfl.png",
+          "rel": [
+            "full",
+            "default"
+          ]
+        },
+        {
+          "href": "https://a.espncdn.com/i/teamlogos/leagues/500-dark/nfl.png",
+          "rel": [
+            "full",
+            "dark"
+          ]
+        }
+      ]
+    }
+  },
+  "gameInfo": {
+    "venue": {
+      "id": "3727",
+      "guid": "3a82e243-5f64-3ce4-bdaf-49367fb55391",
+      "fullName": "Ford Field",
+      "address": {
+        "city": "Detroit",
+        "state": "MI",
+        "zipCode": "48226",
+        "country": "USA"
+      },
+      "grass": false,
+      "images": [
+        {
+          "href": "https://a.espncdn.com/i/venues/nfl/day/3727.jpg",
+          "width": 2000,
+          "height": 1125,
+          "alt": "",
+          "rel": [
+            "full",
+            "day"
+          ]
+        },
+        {
+          "href": "https://a.espncdn.com/i/venues/nfl/day/interior/3727.jpg",
+          "width": 2000,
+          "height": 1125,
+          "alt": "",
+          "rel": [
+            "full",
+            "day",
+            "interior"
+          ]
+        }
+      ]
+    },
+    "weather": {
+      "temperature": 68,
+      "highTemperature": 68,
+      "lowTemperature": 68,
+      "conditionId": "5",
+      "gust": 13,
+      "precipitation": 0,
+      "link": {
+        "language": "en-US",
+        "rel": [
+          "48226"
+        ],
+        "href": "http://www.accuweather.com/en/us/ford-field-mi/48226/hourly-weather-forecast/43021_poi?day=2&hbhhour=16&lang=en-us",
+        "text": "Weather",
+        "shortText": "Weather",
+        "isExternal": true,
+        "isPremium": false
+      }
+    }
+  },
+  "broadcasts": [],
+  "boxscore": {
+    "teams": [
+      {
+        "team": {
+          "id": "9",
+          "uid": "s:20~l:28~t:9",
+          "slug": "green-bay-packers",
+          "location": "Green Bay",
+          "name": "Packers",
+          "abbreviation": "GB",
+          "displayName": "Green Bay Packers",
+          "shortDisplayName": "Packers",
+          "color": "204e32",
+          "alternateColor": "ffb612",
+          "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/gb.png"
+        },
+        "statistics": [
+          {
+            "name": "totalPointsPerGame",
+            "displayValue": "21.2",
+            "label": "Points Per Game"
+          },
+          {
+            "name": "yardsPerGame",
+            "displayValue": "340.5",
+            "label": "Total Yards"
+          },
+          {
+            "name": "passingYardsPerGame",
+            "displayValue": "280.7",
+            "label": "Yards Passing"
+          },
+          {
+            "name": "rushingYardsPerGame",
+            "displayValue": "59.8",
+            "label": "Yards Rushing"
+          },
+          {
+            "name": "totalPointsPerGameAllowed",
+            "displayValue": "20.8",
+            "label": "Points Allowed Per Game"
+          },
+          {
+            "name": "yardsPerGameAllowed",
+            "displayValue": "323.5",
+            "label": "Yards Allowed"
+          },
+          {
+            "name": "passingYardsPerGameAllowed",
+            "displayValue": "209.2",
+            "label": "Pass Yards Allowed"
+          },
+          {
+            "name": "rushingYardsPerGameAllowed",
+            "displayValue": "114.3",
+            "label": "Rush Yards Allowed"
+          }
+        ],
+        "displayOrder": 1,
+        "homeAway": "away"
+      },
+      {
+        "team": {
+          "id": "8",
+          "uid": "s:20~l:28~t:8",
+          "slug": "detroit-lions",
+          "location": "Detroit",
+          "name": "Lions",
+          "abbreviation": "DET",
+          "displayName": "Detroit Lions",
+          "shortDisplayName": "Lions",
+          "color": "0076b6",
+          "alternateColor": "bbbbbb",
+          "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/det.png"
+        },
+        "statistics": [
+          {
+            "name": "totalPointsPerGame",
+            "displayValue": "32.8",
+            "label": "Points Per Game"
+          },
+          {
+            "name": "yardsPerGame",
+            "displayValue": "411.2",
+            "label": "Total Yards"
+          },
+          {
+            "name": "passingYardsPerGame",
+            "displayValue": "297.0",
+            "label": "Yards Passing"
+          },
+          {
+            "name": "rushingYardsPerGame",
+            "displayValue": "114.2",
+            "label": "Yards Rushing"
+          },
+          {
+            "name": "totalPointsPerGameAllowed",
+            "displayValue": "29.6",
+            "label": "Points Allowed Per Game"
+          },
+          {
+            "name": "yardsPerGameAllowed",
+            "displayValue": "428.4",
+            "label": "Yards Allowed"
+          },
+          {
+            "name": "passingYardsPerGameAllowed",
+            "displayValue": "321.4",
+            "label": "Pass Yards Allowed"
+          },
+          {
+            "name": "rushingYardsPerGameAllowed",
+            "displayValue": "107.0",
+            "label": "Rush Yards Allowed"
+          }
+        ],
+        "displayOrder": 2,
+        "homeAway": "home"
+      }
+    ]
+  },
+  "leaders": [
+    {
+      "team": {
+        "id": "8",
+        "uid": "s:20~l:28~t:8",
+        "displayName": "Detroit Lions",
+        "abbreviation": "DET",
+        "links": [
+          {
+            "href": "https://www.espn.com/nfl/team/_/name/det/detroit-lions",
+            "text": "Clubhouse"
+          },
+          {
+            "href": "https://www.espn.com/nfl/team/schedule/_/name/det",
+            "text": "Schedule"
+          }
+        ],
+        "logo": "https://a.espncdn.com/i/teamlogos/nfl/500/det.png",
+        "logos": [
+          {
+            "href": "https://a.espncdn.com/i/teamlogos/nfl/500/det.png",
+            "width": 500,
+            "height": 500,
+            "alt": "",
+            "rel": [
+              "full",
+              "default"
+            ],
+            "lastUpdated": "2024-06-25T18:48Z"
+          },
+          {
+            "href": "https://a.espncdn.com/i/teamlogos/nfl/500-dark/det.png",
+            "width": 500,
+            "height": 500,
+            "alt": "",
+            "rel": [
+              "full",
+              "dark"
+            ],
+            "lastUpdated": "2024-06-25T18:48Z"
+          },
+          {
+            "href": "https://a.espncdn.com/i/teamlogos/nfl/500/scoreboard/det.png",
+            "width": 500,
+            "height": 500,
+            "alt": "",
+            "rel": [
+              "full",
+              "scoreboard"
+            ],
+            "lastUpdated": "2024-06-25T18:48Z"
+          },
+          {
+            "href": "https://a.espncdn.com/i/teamlogos/nfl/500-dark/scoreboard/det.png",
+            "width": 500,
+            "height": 500,
+            "alt": "",
+            "rel": [
+              "full",
+              "scoreboard",
+              "dark"
+            ],
+            "lastUpdated": "2024-06-25T18:48Z"
+          }
+        ]
+      },
+      "leaders": [
+        {
+          "name": "passingYards",
+          "displayName": "Passing Yards",
+          "leaders": [
+            {
+              "displayValue": "128/191, 1,485 YDS, 12 TD",
+              "value": 1485.0,
+              "athlete": {
+                "id": "3046779",
+                "uid": "s:20~l:28~a:3046779",
+                "guid": "987f4f39-ed6f-5915-57eb-ec7dc356171c",
+                "lastName": "Goff",
+                "fullName": "Jared Goff",
+                "displayName": "Jared Goff",
+                "shortName": "J. Goff",
+                "links": [
+                  {
+                    "rel": [
+                      "playercard",
+                      "desktop",
+                      "athlete"
+                    ],
+                    "href": "https://www.espn.com/nfl/player/_/id/3046779/jared-goff",
+                    "text": "Player Card"
+                  }
+                ],
+                "headshot": {
+                  "href": "https://a.espncdn.com/i/headshots/nfl/players/full/3046779.png",
+                  "alt": "Jared Goff"
+                },
+                "jersey": "16",
+                "position": {
+                  "name": "Quarterback",
+                  "displayName": "Quarterback",
+                  "abbreviation": "QB"
+                },
+                "status": "Active",
+                "injuries": {
+                  "status": "Active",
+                  "date": "2026-10-12T01:29Z",
+                  "type": {
+                    "id": "0",
+                    "name": "INJURY_STATUS_ACTIVE",
+                    "description": "active",
+                    "abbreviation": "A"
+                  }
+                }
+              },
+              "mainStat": {
+                "value": "1,485",
+                "label": "YDS"
+              },
+              "summary": "128/191, 12 TD"
+            }
+          ]
+        },
+        {
+          "name": "rushingYards",
+          "displayName": "Rushing Yards",
+          "leaders": [
+            {
+              "displayValue": "105 CAR, 504 YDS, 7 TD",
+              "value": 504.0,
+              "athlete": {
+                "id": "4429795",
+                "uid": "s:20~l:28~a:4429795",
+                "guid": "d85aed19-e3b8-3788-935e-55f636ad86e9",
+                "lastName": "Gibbs",
+                "fullName": "Jahmyr Gibbs",
+                "displayName": "Jahmyr Gibbs",
+                "shortName": "J. Gibbs",
+                "links": [
+                  {
+                    "rel": [
+                      "playercard",
+                      "desktop",
+                      "athlete"
+                    ],
+                    "href": "https://www.espn.com/nfl/player/_/id/4429795/jahmyr-gibbs",
+                    "text": "Player Card"
+                  }
+                ],
+                "headshot": {
+                  "href": "https://a.espncdn.com/i/headshots/nfl/players/full/4429795.png",
+                  "alt": "Jahmyr Gibbs"
+                },
+                "jersey": "0",
+                "position": {
+                  "name": "Running Back",
+                  "displayName": "Running Back",
+                  "abbreviation": "RB"
+                },
+                "status": "Active",
+                "injuries": {
+                  "status": "Active",
+                  "date": "2026-10-12T00:27Z",
+                  "type": {
+                    "id": "0",
+                    "name": "INJURY_STATUS_ACTIVE",
+                    "description": "active",
+                    "abbreviation": "A"
+                  }
+                }
+              },
+              "mainStat": {
+                "value": "504",
+                "label": "YDS"
+              },
+              "summary": "105 CAR, 7 TD"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
