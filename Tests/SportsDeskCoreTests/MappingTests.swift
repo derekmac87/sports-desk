@@ -169,6 +169,31 @@ struct FixTests {
         #expect(ranks == ranks.sorted())
     }
 
+    @Test func countdownFormatting() throws {
+        let now = try #require(DateParser.parse("2026-10-24T18:00:00Z"))
+        #expect(GameTimeFormatting.countdown(until: now.addingTimeInterval(-5), now: now) == nil)
+        #expect(GameTimeFormatting.countdown(until: now.addingTimeInterval(7 * 60 + 5), now: now) == "7:05")
+        #expect(GameTimeFormatting.countdown(until: now.addingTimeInterval(3 * 3600 + 5 * 60), now: now) == "3h 05m")
+        #expect(GameTimeFormatting.countdown(until: now.addingTimeInterval(2 * 86_400 + 4 * 3600), now: now) == "2d 4h")
+    }
+
+    @Test func startLabelUsesLocalTimeZone() throws {
+        let posix = Locale(identifier: "en_US_POSIX")
+        let toronto = try #require(TimeZone(identifier: "America/Toronto"))
+        let vancouver = try #require(TimeZone(identifier: "America/Vancouver"))
+        let now = try #require(DateParser.parse("2026-10-24T14:00:00Z"))
+        // 23:00Z = 7 PM in Toronto, 4 PM in Vancouver.
+        let puckDrop = try #require(DateParser.parse("2026-10-24T23:00:00Z"))
+        #expect(GameTimeFormatting.startLabel(for: puckDrop, now: now, timeZone: toronto, locale: posix).hasPrefix("Tonight"))
+        #expect(GameTimeFormatting.startLabel(for: puckDrop, now: now, timeZone: toronto, locale: posix).contains("7:00"))
+        #expect(GameTimeFormatting.startLabel(for: puckDrop, now: now, timeZone: vancouver, locale: posix).hasPrefix("Today"))
+        // 00:30Z on the 27th is still the evening of the 26th in Toronto.
+        let late = try #require(DateParser.parse("2026-10-27T00:30:00Z"))
+        #expect(GameTimeFormatting.startLabel(for: late, now: now, timeZone: toronto, locale: posix).hasPrefix("Mon"))
+        let tomorrow = try #require(DateParser.parse("2026-10-25T17:00:00Z"))
+        #expect(GameTimeFormatting.startLabel(for: tomorrow, now: now, timeZone: toronto, locale: posix).hasPrefix("Tomorrow"))
+    }
+
     @Test func errorsHaveReadableMessages() {
         #expect(SportsDeskError.network("HTTP 503").localizedDescription.contains("HTTP 503"))
     }
