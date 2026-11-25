@@ -60,6 +60,8 @@ public struct TeamSummary: Hashable, Sendable, Identifiable {
     public var logoURL: URL?
     public var providerCode: String
 
+    public var league: League { id.league }
+
     public init(
         id: TeamID,
         displayName: String,

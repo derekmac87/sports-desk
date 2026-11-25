@@ -196,6 +196,15 @@ public struct GameSnapshot: Hashable, Sendable, Identifiable {
         guard let homeScore, let awayScore else { return nil }
         return "\(awayCode) \(awayScore)  @  \(homeCode) \(homeScore)"
     }
+
+    public var teamScore: Int? { isHome ? homeScore : awayScore }
+    public var opponentScore: Int? { isHome ? awayScore : homeScore }
+
+    /// "W", "L" or "T" for finished games with scores.
+    public var outcome: String? {
+        guard phase == .final, let teamScore, let opponentScore else { return nil }
+        return teamScore > opponentScore ? "W" : (teamScore < opponentScore ? "L" : "T")
+    }
 }
 
 public struct LinePlayer: Hashable, Sendable, Identifiable {
@@ -275,6 +284,8 @@ public struct DepthChartReport: Hashable, Sendable {
     public var sourceName: String
     public var starters: [DepthSlot]
     public var units: [String: [DepthSlot]]
+    /// Unit names in feed order (dictionaries lose it).
+    public var unitOrder: [String]
     public var isUnavailable: Bool
     public var unavailableReason: String?
 
@@ -282,12 +293,14 @@ public struct DepthChartReport: Hashable, Sendable {
         sourceName: String,
         starters: [DepthSlot] = [],
         units: [String: [DepthSlot]] = [:],
+        unitOrder: [String]? = nil,
         isUnavailable: Bool = false,
         unavailableReason: String? = nil
     ) {
         self.sourceName = sourceName
         self.starters = starters
         self.units = units
+        self.unitOrder = unitOrder ?? units.keys.sorted()
         self.isUnavailable = isUnavailable
         self.unavailableReason = unavailableReason
     }
@@ -388,4 +401,16 @@ public enum SportsDeskError: Error, Equatable, Sendable {
     case network(String)
     case decoding(String)
     case unavailable(String)
+}
+
+extension SportsDeskError: LocalizedError {
+    public var errorDescription: String? {
+        switch self {
+        case .unknownTeam(let id): return "\(id.code) isn't a known \(id.league.displayName) team."
+        case .unsupportedLeague(let league): return "\(league.displayName) isn't supported yet."
+        case .network(let detail): return "The data feed didn't respond (\(detail))."
+        case .decoding(let detail): return "The data feed changed shape (\(detail))."
+        case .unavailable(let detail): return detail
+        }
+    }
 }

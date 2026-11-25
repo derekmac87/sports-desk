@@ -25,11 +25,200 @@ struct SettingsTests {
         #expect(store.load().favourites.map(\.code) == ["DET"])
     }
 
-    @Test func emptyFavouritesFallBackToDefaults() {
-        let local = MemoryKeyValueStore()
-        let store = SettingsStore(local: local)
-        store.save(UserSettings(favourites: []))
+    @Test func defaultsOnlyOnFirstRunAndEmptyListIsKept() {
+        let store = SettingsStore(local: MemoryKeyValueStore())
         #expect(store.load() == .default)
+        store.save(UserSettings(favourites: []))
+        #expect(store.load().favourites.isEmpty)
+    }
+
+    @Test func unknownAndDuplicateTeamsAreDropped() {
+        let store = SettingsStore(local: MemoryKeyValueStore())
+        store.save(UserSettings(favourites: [
+            FavouriteTeam(league: .nhl, code: "TOR"),
+            FavouriteTeam(league: .nhl, code: "tor"),
+            FavouriteTeam(league: .nhl, code: "ARI")
+        ]))
+        #expect(store.load().favourites.map(\.id) == ["nhl:TOR"])
+    }
+
+    @Test func settingsDecodeWithMissingKeys() throws {
+        let json = Data(#"{"favourites":[{"league":"nfl","code":"DET"}]}"#.utf8)
+        let settings = try JSONDecoder().decode(UserSettings.self, from: json)
+        #expect(settings.favourites.map(\.code) == ["DET"])
+        #expect(settings.useDeviceTimeZone)
+    }
+}
+
+@Suite("Fixes")
+struct FixTests {
+    private func team(_ league: League, _ code: String) throws -> TeamSummary {
+        try #require(TeamCatalog.shared.team(for: TeamID(league: league, code: code)))
+    }
+
+    @Test func espnScheduleScoresDecodeFromObjects() throws {
+        let schedule = try FixtureLoader.decode(ESPNScheduleResponse.self, "espn_gb_schedule.json")
+        let final = try #require(schedule.events?.first { $0.competitions?.first?.status?.type?.state == "post" })
+        let game = NFLProvider.gameSnapshot(event: final, team: try team(.nfl, "GB"))
+        #expect(game.phase == .final)
+        #expect(game.teamScore == 23)
+        #expect(game.opponentScore == 13)
+        #expect(game.outcome == "W")
+        #expect(game.opponentLogoURL?.pathExtension == "png")
+        #expect(game.periodLabel == "Q4")
+        #expect(game.clock == nil)
+    }
+
+    @Test func nflPicksRecentFinalThenNextGame() throws {
+        let schedule = try FixtureLoader.decode(ESPNScheduleResponse.self, "espn_gb_schedule.json")
+        let events = schedule.events ?? []
+        let rightAfter = try #require(DateParser.parse("2026-10-19T04:00:00Z"))
+        #expect(NFLProvider.pickEvent(nextEvents: [], schedule: events, now: rightAfter)?.competitions?.first?.status?.type?.state == "post")
+        let midweek = try #require(DateParser.parse("2026-10-22T12:00:00Z"))
+        let next = try #require(NFLProvider.pickEvent(nextEvents: [], schedule: events, now: midweek))
+        #expect(next.competitions?.first?.status?.type?.state == "pre")
+        #expect(NFLProvider.gameSnapshot(event: next, team: try team(.nfl, "GB")).homeScore == nil)
+    }
+
+    @Test func nflPeriodLabels() {
+        #expect(NFLProvider.periodLabel(0) == nil)
+        #expect(NFLProvider.periodLabel(4) == "Q4")
+        #expect(NFLProvider.periodLabel(5) == "OT")
+        #expect(NFLProvider.periodLabel(6) == "2OT")
+    }
+
+    @Test func nflStandingsOrderedByWinPct() throws {
+        let standings = try FixtureLoader.decode(ESPNStandingsResponse.self, "espn_nfl_standings.json")
+        let snapshot = NFLProvider.standingsSnapshot(standings, favourite: try team(.nfl, "GB"), catalog: .shared)
+        let pcts = snapshot.leagueRows.map(NFLProvider.winPct)
+        #expect(pcts == pcts.sorted(by: >))
+        #expect(snapshot.leagueRows.map(\.rank) == Array(1...snapshot.leagueRows.count))
+        #expect(NFLProvider.winPct(StandingRow(team: try team(.nfl, "GB"), rank: 1, gamesPlayed: 3, record: "1-1-1", pointsOrPct: "", pointsFor: "", pointsAgainst: "")) == 0.5)
+    }
+
+    @Test func nhlFinalHasScoresAndNoStaleClock() throws {
+        let landing = try FixtureLoader.decode(NHLLandingResponse.self, "nhl_landing_final.json")
+        let week = try FixtureLoader.decode(NHLWeekScheduleResponse.self, "nhl_club_week.json")
+        let game = NHLProvider.gameSnapshot(schedule: week.games[0], landing: landing, boxscore: nil, team: try team(.nhl, "TOR"))
+        #expect(game.phase == .final)
+        #expect(game.isHome)
+        #expect(game.outcome == "W")
+        #expect(game.opponentName == "New York Rangers")
+        #expect(game.opponentLogoURL?.absoluteString.hasSuffix("/nyr.png") == true)
+        #expect(game.clock == nil)
+        #expect(game.detailHeadline == "Final")
+    }
+
+    @Test func nhlUpcomingGameHasNoPeriod() throws {
+        let week = try FixtureLoader.decode(NHLWeekScheduleResponse.self, "nhl_club_week.json")
+        let game = NHLProvider.gameSnapshot(schedule: week.games[0], landing: nil, boxscore: nil, team: try team(.nhl, "TOR"))
+        #expect(game.phase == .upcoming)
+        #expect(game.periodLabel == nil)
+        #expect(game.homeScore == nil && game.awayScore == nil)
+    }
+
+    @Test func nhlPeriodLabels() {
+        #expect(NHLProvider.periodLabel(NHLPeriod(number: 2, periodType: "REG")) == "P2")
+        #expect(NHLProvider.periodLabel(NHLPeriod(number: 4, periodType: "OT")) == "OT")
+        #expect(NHLProvider.periodLabel(NHLPeriod(number: 6, periodType: "OT")) == "3OT")
+        #expect(NHLProvider.periodLabel(NHLPeriod(number: 5, periodType: "SO")) == "SO")
+    }
+
+    @Test func nhlPicksRecentFinalOverNextGame() throws {
+        var finished = try FixtureLoader.decode(NHLWeekScheduleResponse.self, "nhl_club_week.json").games
+        finished[0].gameState = "OFF"
+        let start = try #require(DateParser.parse(finished[0].startTimeUTC))
+        let tor = try team(.nhl, "TOR")
+        #expect(NHLProvider.pickGame(from: finished, team: tor, now: start.addingTimeInterval(3 * 3600))?.id == finished[0].id)
+        #expect(NHLProvider.pickGame(from: finished, team: tor, now: start.addingTimeInterval(20 * 3600))?.id == finished[1].id)
+    }
+
+    @Test func nhlSummaryMatchesByTeamIDNotCity() throws {
+        let rangers = try team(.nhl, "NYR")
+        let summary = NHLTeamSummaryResponse(data: [
+            NHLTeamSummaryRow(teamFullName: "New York Islanders", teamId: 2, powerPlayPct: 0.10),
+            NHLTeamSummaryRow(teamFullName: "New York Rangers", teamId: 3, powerPlayPct: 0.25)
+        ])
+        let standings = StandingsSnapshot(league: .nhl, leagueRows: [], conferenceRows: [], divisionRows: [])
+        let block = NHLProvider.teamStats(team: rangers, summary: summary, standings: standings, club: NHLClubStatsResponse(skaters: [], goalies: []))
+        #expect(block.items.first { $0.label == "PP%" }?.value == "25.0%")
+    }
+
+    @Test func seasonIdentifiers() throws {
+        let october = try #require(DateParser.parse("2026-10-24T18:00:00Z"))
+        let february = try #require(DateParser.parse("2027-02-07T23:30:00Z"))
+        let july = try #require(DateParser.parse("2027-07-01T12:00:00Z"))
+        #expect(Season.nhlSeasonID(for: october) == "20262027")
+        #expect(Season.nhlSeasonID(for: february) == "20262027")
+        #expect(Season.nhlSeasonID(for: july) == "20262027")
+        #expect(Season.nflSeasonYear(for: october) == 2026)
+        #expect(Season.nflSeasonYear(for: february) == 2026)
+    }
+
+    @Test func logosArePNG() {
+        for team in TeamCatalog.shared.teams {
+            #expect(team.logoURL?.pathExtension == "png", "\(team.id)")
+        }
+        #expect(TeamCatalog.logoURL(league: .nhl, abbreviation: "TBL")?.lastPathComponent == "tb.png")
+    }
+
+    @Test func injuriesSortedBySeverity() throws {
+        let response = try FixtureLoader.decode(ESPNInjuriesResponse.self, "espn_nfl_injuries.json")
+        let report = ESPNInjuryProvider.map(response, team: try team(.nfl, "GB"))
+        let ranks = report.items.map { ESPNInjuryProvider.severity(status: $0.status) }
+        #expect(ranks == ranks.sorted())
+    }
+
+    @Test func countdownFormatting() throws {
+        let now = try #require(DateParser.parse("2026-10-24T18:00:00Z"))
+        #expect(GameTimeFormatting.countdown(until: now.addingTimeInterval(-5), now: now) == nil)
+        #expect(GameTimeFormatting.countdown(until: now.addingTimeInterval(7 * 60 + 5), now: now) == "7:05")
+        #expect(GameTimeFormatting.countdown(until: now.addingTimeInterval(3 * 3600 + 5 * 60), now: now) == "3h 05m")
+        #expect(GameTimeFormatting.countdown(until: now.addingTimeInterval(2 * 86_400 + 4 * 3600), now: now) == "2d 4h")
+    }
+
+    @Test func startLabelUsesLocalTimeZone() throws {
+        let posix = Locale(identifier: "en_US_POSIX")
+        let toronto = try #require(TimeZone(identifier: "America/Toronto"))
+        let vancouver = try #require(TimeZone(identifier: "America/Vancouver"))
+        let now = try #require(DateParser.parse("2026-10-24T14:00:00Z"))
+        // 23:00Z = 7 PM in Toronto, 4 PM in Vancouver.
+        let puckDrop = try #require(DateParser.parse("2026-10-24T23:00:00Z"))
+        #expect(GameTimeFormatting.startLabel(for: puckDrop, now: now, timeZone: toronto, locale: posix).hasPrefix("Tonight"))
+        #expect(GameTimeFormatting.startLabel(for: puckDrop, now: now, timeZone: toronto, locale: posix).contains("7:00"))
+        #expect(GameTimeFormatting.startLabel(for: puckDrop, now: now, timeZone: vancouver, locale: posix).hasPrefix("Today"))
+        // 00:30Z on the 27th is still the evening of the 26th in Toronto.
+        let late = try #require(DateParser.parse("2026-10-27T00:30:00Z"))
+        #expect(GameTimeFormatting.startLabel(for: late, now: now, timeZone: toronto, locale: posix).hasPrefix("Mon"))
+        let tomorrow = try #require(DateParser.parse("2026-10-25T17:00:00Z"))
+        #expect(GameTimeFormatting.startLabel(for: tomorrow, now: now, timeZone: toronto, locale: posix).hasPrefix("Tomorrow"))
+    }
+
+    @Test func errorsHaveReadableMessages() {
+        #expect(SportsDeskError.network("HTTP 503").localizedDescription.contains("HTTP 503"))
+    }
+
+    @Test func serviceLoadsConcurrentlyInOrderAndReportsFailures() async {
+        struct Stub: LeagueDashboardProviding {
+            var league: League
+            func dashboard(for team: TeamSummary) async throws -> TeamDashboard {
+                if team.abbreviation == "BOS" { throw SportsDeskError.network("HTTP 500") }
+                try await Task.sleep(nanoseconds: team.abbreviation == "TOR" ? 50_000_000 : 1_000_000)
+                return TeamDashboard(
+                    team: team,
+                    standings: StandingsSnapshot(league: league, leagueRows: [], conferenceRows: [], divisionRows: []),
+                    teamStats: TeamStatBlock(headline: "", items: [])
+                )
+            }
+        }
+        let service = DashboardService(providers: [.nhl: Stub(league: .nhl), .nfl: Stub(league: .nfl)])
+        let result = await service.dashboards(for: [
+            FavouriteTeam(league: .nhl, code: "TOR"),
+            FavouriteTeam(league: .nhl, code: "BOS"),
+            FavouriteTeam(league: .nfl, code: "GB")
+        ])
+        #expect(result.boards.map(\.team.abbreviation) == ["TOR", "GB"])
+        #expect(result.failures.map(\.teamName) == ["Boston Bruins"])
     }
 }
 
@@ -139,6 +328,17 @@ struct ProviderIntegrationTests {
         #expect(!board.teamStats.players.isEmpty)
         #expect(board.game?.opponentCode == "EDM")
         #expect(board.lines?.isUnavailable == false)
+        #expect(board.teamStats.items.contains { $0.label == "PP%" })
+    }
+
+    @Test func nhlProviderSurvivesMissingOptionalFeeds() async throws {
+        let standings = try FixtureLoader.data("nhl_standings.json")
+        let transport = FixtureHTTPSession(responses: ["api-web.nhle.com/v1/standings/now": standings])
+        let provider = NHLProvider(client: HTTPClient(transport: transport), lineProvider: UnavailableLineProvider(reason: "test"))
+        let team = try #require(TeamCatalog.shared.team(for: TeamID(league: .nhl, code: "TOR")))
+        let board = try await provider.dashboard(for: team)
+        #expect(board.game == nil)
+        #expect(!board.standings.divisionRows.isEmpty)
     }
 
     @Test func nflProviderIncludesInjuries() async throws {
@@ -150,7 +350,9 @@ struct ProviderIntegrationTests {
         #expect(board.team.abbreviation == "GB")
         #expect((board.injuries?.keyItems.count ?? 0) > 0)
         #expect(board.depthChart?.isUnavailable != true)
-        #expect(board.game != nil)
+        #expect(board.depthChart?.unitOrder.isEmpty == false)
+        #expect(board.game?.opponentCode == "DET")
+        #expect(Set(board.teamStats.players.map(\.id)).count == board.teamStats.players.count)
     }
 }
 

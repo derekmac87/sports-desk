@@ -3,158 +3,125 @@ import SwiftUI
 
 struct DashboardView: View {
     @EnvironmentObject private var model: AppModel
+    var openSettings: () -> Void
+
+    #if os(iOS)
+    @Environment(\.horizontalSizeClass) private var sizeClass
+    #endif
 
     var body: some View {
-        Group {
-            if model.isLoading && model.dashboards.isEmpty {
-                ProgressView("Loading your teams…")
-                    .font(Theme.bodyFont)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-            } else if model.dashboards.isEmpty {
-                emptyState
-            } else {
-                ScrollView {
-                    LazyVStack(alignment: .leading, spacing: sectionSpacing) {
-                        header
-                        ForEach(model.dashboards) { board in
-                            NavigationLink(value: board.team.id.description) {
-                                TeamSummaryCard(board: board)
-                            }
-                            #if os(tvOS)
-                            .buttonStyle(.card)
-                            #else
-                            .buttonStyle(.plain)
-                            #endif
-                        }
-                    }
-                    .padding(.horizontal, Theme.horizontalPadding)
-                    .padding(.vertical, 20)
-                }
+        ScrollView {
+            VStack(alignment: .leading, spacing: Theme.sectionSpacing) {
+                header
+                content
             }
+            .padding(.horizontal, Theme.horizontalPadding)
+            .padding(.bottom, 24)
         }
-        .background(Color.black.ignoresSafeArea())
+        .scrollIndicators(.hidden)
+        .background(AmbientBackground(colors: model.dashboards.prefix(2).map(\.team.primaryColor)))
+        #if os(iOS)
+        .refreshable { await model.refresh() }
         .navigationTitle("Sports Desk")
-        .navigationDestination(for: String.self) { id in
-            if let board = model.dashboards.first(where: { $0.id == id }) {
-                TeamDashboardView(board: board)
+        .toolbar(.hidden, for: .navigationBar)
+        #endif
+    }
+
+    // MARK: Header
+
+    private var header: some View {
+        HStack(alignment: .bottom) {
+            VStack(alignment: .leading, spacing: 4) {
+                Text(Date.now, format: .dateTime.weekday(.wide).month(.wide).day())
+                    .font(.subheadline.weight(.semibold))
+                    .foregroundStyle(.secondary)
+                    .textCase(.uppercase)
+                Text("Sports Desk")
+                    .font(.largeTitle.weight(.heavy))
+                    .fontDesign(.rounded)
+                    .accessibilityAddTraits(.isHeader)
             }
-        }
-        .toolbar {
-            ToolbarItem(placement: .primaryAction) {
+            Spacer()
+            VStack(alignment: .trailing, spacing: 6) {
+                if model.isLoading && model.hasLoaded {
+                    ProgressView()
+                        .accessibilityLabel("Refreshing")
+                } else if let updated = model.lastUpdated {
+                    (Text("Updated ") + Text(updated, style: .relative) + Text(" ago"))
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
+                #if os(tvOS)
                 Button {
                     Task { await model.refresh() }
                 } label: {
-                    Image(systemName: "arrow.clockwise")
+                    Label("Refresh", systemImage: "arrow.clockwise")
                 }
-                .accessibilityLabel("Refresh")
+                #endif
             }
         }
-        #if os(iOS)
-        .refreshable { await model.refresh() }
-        #endif
+        .padding(.top, Theme.isTV ? 0 : 12)
+        .tvFocusSection()
     }
 
-    private var header: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Text("Your teams")
-                .font(Theme.titleFont)
-            Text(subtitle)
-                .font(Theme.bodyFont)
-                .foregroundStyle(.secondary)
-            if let error = model.errorMessage, !model.dashboards.isEmpty {
-                Text(error)
-                    .font(.callout)
-                    .foregroundStyle(.orange)
+    // MARK: Content
+
+    @ViewBuilder
+    private var content: some View {
+        if model.settings.favourites.isEmpty {
+            ContentUnavailableView {
+                Label("Pick your teams", systemImage: "star")
+            } description: {
+                Text("Follow any NHL or NFL team. Your picks sync over iCloud to Apple TV, iPhone and iPad.")
+            } actions: {
+                Button("Choose teams", action: openSettings)
+                    #if os(iOS)
+                    .buttonStyle(.borderedProminent)
+                    #endif
             }
-        }
-    }
-
-    private var emptyState: some View {
-        VStack(spacing: 16) {
-            Text("No teams yet")
-                .font(Theme.titleFont)
-            Text(model.errorMessage ?? "Add a favourite NHL or NFL team in Settings. Your picks sync over iCloud to Apple TV, iPhone, and iPad.")
-                .font(Theme.bodyFont)
-                .multilineTextAlignment(.center)
-                .foregroundStyle(.secondary)
-                .padding(.horizontal, 24)
-        }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-    }
-
-    private var subtitle: String {
-        if let last = model.lastUpdated {
-            return "Updated \(DateParser.display(date: last))"
-        }
-        return "Leafs and Packers are the starting lineup. Change them anytime."
-    }
-
-    private var sectionSpacing: CGFloat {
-        #if os(tvOS)
-        28
-        #else
-        16
-        #endif
-    }
-}
-
-struct TeamSummaryCard: View {
-    var board: TeamDashboard
-
-    var body: some View {
-        HStack(alignment: .center, spacing: 16) {
-            RemoteImage(url: board.team.logoURL, size: logoSize)
-            VStack(alignment: .leading, spacing: 6) {
-                Text(board.team.displayName)
-                    .font(Theme.titleFont)
-                Text(board.team.league.displayName)
-                    .font(.subheadline.weight(.semibold))
-                    .foregroundStyle(board.team.secondaryColor)
-                if let game = board.game {
-                    Text(gameLine(game))
-                        .font(Theme.bodyFont)
-                        .foregroundStyle(.secondary)
+            .padding(.top, 60)
+        } else if !model.hasLoaded {
+            LazyVGrid(columns: columns, spacing: Theme.gridSpacing) {
+                ForEach(model.settings.favourites) { _ in TeamCardSkeleton() }
+            }
+            .transition(.opacity)
+        } else if model.dashboards.isEmpty && !model.failures.isEmpty {
+            ContentUnavailableView {
+                Label("Scores are offline", systemImage: "wifi.exclamationmark")
+            } description: {
+                Text("We couldn't reach the NHL or ESPN feeds. Check your connection and try again.")
+            } actions: {
+                Button("Try again") { Task { await model.refresh() } }
+                    #if os(iOS)
+                    .buttonStyle(.borderedProminent)
+                    #endif
+            }
+            .padding(.top, 60)
+        } else {
+            LazyVGrid(columns: columns, alignment: .leading, spacing: Theme.gridSpacing) {
+                ForEach(model.dashboards) { board in
+                    NavigationLink(value: Route.team(board.id)) {
+                        TeamSpotlightCard(board: board)
+                    }
+                    .cardLinkStyle()
+                    .transition(.scale(scale: 0.96).combined(with: .opacity))
                 }
-                if let record = board.teamStats.items.first(where: { $0.label == "Record" }) {
-                    Text(record.value)
-                        .font(.headline)
+                ForEach(model.failures) { failure in
+                    TeamErrorCard(failure: failure) { Task { await model.refresh() } }
                 }
             }
-            Spacer()
-            Image(systemName: "chevron.right")
-                .foregroundStyle(.secondary)
-        }
-        .padding(cardPadding)
-        .background(board.team.primaryColor.opacity(0.35), in: RoundedRectangle(cornerRadius: Theme.cardRadius, style: .continuous))
-    }
-
-    private func gameLine(_ game: GameSnapshot) -> String {
-        switch game.phase {
-        case .live:
-            return [game.scoreLine, game.periodLabel, game.clock].compactMap { $0 }.joined(separator: " · ")
-        case .final:
-            return game.scoreLine.map { "Final · \($0)" } ?? "Final"
-        case .upcoming:
-            let when = game.start.map { DateParser.weekdayTime(date: $0) } ?? game.detailHeadline
-            return "\(game.isHome ? "vs" : "@") \(game.opponentName) · \(when)"
-        case .unknown:
-            return game.opponentName
+            .tvFocusSection()
+            .animation(.smooth, value: model.dashboards.map(\.id))
         }
     }
 
-    private var logoSize: CGFloat {
+    private var columns: [GridItem] {
         #if os(tvOS)
-        92
+        [GridItem(.adaptive(minimum: 700), spacing: Theme.gridSpacing, alignment: .top)]
         #else
-        56
-        #endif
-    }
-
-    private var cardPadding: CGFloat {
-        #if os(tvOS)
-        24
-        #else
-        14
+        sizeClass == .regular
+            ? [GridItem(.adaptive(minimum: 420), spacing: Theme.gridSpacing, alignment: .top)]
+            : [GridItem(.flexible(), alignment: .top)]
         #endif
     }
 }

@@ -22,18 +22,25 @@ public struct NHLProvider: LeagueDashboardProviding {
     }
 
     public func dashboard(for team: TeamSummary) async throws -> TeamDashboard {
+        // Standings are required; everything else degrades to empty sections (off-season, feed hiccups).
         async let standingsResponse = client.getJSON(NHLStandingsResponse.self, url: NHLAPI.standingsNow)
-        async let clubStats = client.getJSON(NHLClubStatsResponse.self, url: NHLAPI.clubStats(team.abbreviation))
-        async let week = client.getJSON(NHLWeekScheduleResponse.self, url: NHLAPI.clubWeek(team.abbreviation))
-        async let summary = optionalJSON(NHLTeamSummaryResponse.self, url: NHLAPI.teamSummary)
+        async let clubStats = optionalJSON(NHLClubStatsResponse.self, url: NHLAPI.clubStats(team.abbreviation))
+        async let week = optionalJSON(NHLWeekScheduleResponse.self, url: NHLAPI.clubWeek(team.abbreviation))
         async let lines = lineProvider.lines(for: team)
 
         let standings = try await standingsResponse
         let snapshot = Self.standingsSnapshot(standings, favourite: team, catalog: catalog)
-        let stats = try await clubStats
-        let schedule = try await week
-        let game = try await hydrate(game: Self.pickGame(from: schedule.games, team: team), team: team)
-        let teamStats = Self.teamStats(team: team, summary: await summary, standings: snapshot, club: stats)
+        let stats = await clubStats
+        let seasonID = stats?.season?.value ?? Season.nhlSeasonID(for: Date())
+        async let summary = optionalJSON(NHLTeamSummaryResponse.self, url: NHLAPI.teamSummary(season: seasonID))
+        let schedule = await week
+        let game = await hydrate(game: Self.pickGame(from: schedule?.games ?? [], team: team), team: team)
+        let teamStats = Self.teamStats(
+            team: team,
+            summary: await summary,
+            standings: snapshot,
+            club: stats ?? NHLClubStatsResponse(skaters: [], goalies: [])
+        )
 
         return TeamDashboard(
             team: team,
@@ -44,18 +51,14 @@ public struct NHLProvider: LeagueDashboardProviding {
         )
     }
 
-    func hydrate(game: NHLScheduleGame?, team: TeamSummary) async throws -> GameSnapshot? {
+    func hydrate(game: NHLScheduleGame?, team: TeamSummary) async -> GameSnapshot? {
         guard let game else { return nil }
-        var landing: NHLLandingResponse?
-        var boxscore: NHLBoxscoreResponse?
-        if let url = NHLAPI.landing(game.id) {
-            landing = try? await client.getJSON(NHLLandingResponse.self, url: url)
-        }
-        let state = (landing?.gameState ?? game.gameState ?? "").uppercased()
-        if ["LIVE", "CRIT", "FINAL", "OFF"].contains(state), let url = NHLAPI.boxscore(game.id) {
-            boxscore = try? await client.getJSON(NHLBoxscoreResponse.self, url: url)
-        }
-        return Self.gameSnapshot(schedule: game, landing: landing, boxscore: boxscore, team: team)
+        let scheduleState = (game.gameState ?? "").uppercased()
+        async let landing = optionalJSON(NHLLandingResponse.self, url: NHLAPI.landing(game.id))
+        async let boxscore: NHLBoxscoreResponse? = Self.hasStarted(scheduleState)
+            ? optionalJSON(NHLBoxscoreResponse.self, url: NHLAPI.boxscore(game.id))
+            : nil
+        return Self.gameSnapshot(schedule: game, landing: await landing, boxscore: await boxscore, team: team, catalog: catalog)
     }
 
     private func optionalJSON<T: Decodable>(_ type: T.Type, url: URL?) async -> T? {
@@ -63,14 +66,27 @@ public struct NHLProvider: LeagueDashboardProviding {
         return try? await client.getJSON(type, url: url)
     }
 
-    static func pickGame(from games: [NHLScheduleGame], team: TeamSummary) -> NHLScheduleGame? {
-        let live = games.first { ["LIVE", "CRIT"].contains(($0.gameState ?? "").uppercased()) }
-        if let live { return live }
-        let upcoming = games
-            .filter { ["FUT", "PRE"].contains(($0.gameState ?? "").uppercased()) }
-            .sorted { ($0.startTimeUTC ?? "") < ($1.startTimeUTC ?? "") }
-        if let next = upcoming.first { return next }
-        return games.last { ["OFF", "FINAL"].contains(($0.gameState ?? "").uppercased()) } ?? games.last
+    private static func hasStarted(_ state: String) -> Bool {
+        ["LIVE", "CRIT", "FINAL", "OFF"].contains(state)
+    }
+
+    /// Live game first, then a game that finished within `recentWindow`, then the next scheduled game.
+    static func pickGame(
+        from games: [NHLScheduleGame],
+        team: TeamSummary,
+        now: Date = Date(),
+        recentWindow: TimeInterval = 12 * 3600
+    ) -> NHLScheduleGame? {
+        func state(_ game: NHLScheduleGame) -> String { (game.gameState ?? "").uppercased() }
+        func start(_ game: NHLScheduleGame) -> Date { DateParser.parse(game.startTimeUTC) ?? .distantPast }
+
+        if let live = games.first(where: { ["LIVE", "CRIT"].contains(state($0)) }) { return live }
+        let finished = games.filter { ["OFF", "FINAL"].contains(state($0)) }.sorted { start($0) < start($1) }
+        if let recent = finished.last, now.timeIntervalSince(start(recent)) < recentWindow {
+            return recent
+        }
+        let upcoming = games.filter { ["FUT", "PRE"].contains(state($0)) }.sorted { start($0) < start($1) }
+        return upcoming.first ?? finished.last ?? games.last
     }
 
     static func standingsSnapshot(_ response: NHLStandingsResponse, favourite: TeamSummary, catalog: TeamCatalog) -> StandingsSnapshot {
@@ -86,7 +102,7 @@ public struct NHLProvider: LeagueDashboardProviding {
                 division: row.divisionName,
                 primaryHex: "333333",
                 secondaryHex: "FFFFFF",
-                logoURL: URL(string: row.teamLogo ?? "")
+                logoURL: TeamCatalog.logoURL(league: .nhl, abbreviation: code)
             )
             return StandingRow(
                 team: team,
@@ -133,10 +149,9 @@ public struct NHLProvider: LeagueDashboardProviding {
         club: NHLClubStatsResponse
     ) -> TeamStatBlock {
         let row = standings.leagueRows.first(where: { $0.team.abbreviation == team.abbreviation })
-        let summaryRow = summary?.data.first {
-            ($0.teamFullName ?? "").localizedCaseInsensitiveContains(team.shortName)
-                || ($0.teamFullName ?? "").localizedCaseInsensitiveContains(team.city)
-        }
+        // Match on id or full name only: city alone would confuse NYR/NYI.
+        let summaryRow = summary?.data.first { $0.teamId.map(String.init) == team.providerCode }
+            ?? summary?.data.first { ($0.teamFullName ?? "").localizedCaseInsensitiveCompare(team.displayName) == .orderedSame }
         var items: [StatLine] = []
         if let row {
             items.append(StatLine(label: "Record", value: row.record, detail: row.pointsOrPct))
@@ -168,8 +183,8 @@ public struct NHLProvider: LeagueDashboardProviding {
                 name: "\(goalie.firstName.value) \(goalie.lastName.value)",
                 position: "G",
                 headshotURL: URL(string: goalie.headshot ?? ""),
-                line: String(format: "%.2f GAA", goalie.goalsAgainstAverage ?? 0),
-                secondary: String(format: ".%03.0f SV%% · %d-%d-%d", (goalie.savePercentage ?? 0) * 1000, goalie.wins ?? 0, goalie.losses ?? 0, goalie.overtimeLosses ?? 0)
+                line: goalie.goalsAgainstAverage.map { String(format: "%.2f GAA", $0) } ?? "—",
+                secondary: "\(savePct(goalie.savePercentage)) SV% · \(goalie.wins ?? 0)-\(goalie.losses ?? 0)-\(goalie.overtimeLosses ?? 0)"
             )
         }
         return TeamStatBlock(headline: row.map { "\($0.record), \($0.pointsOrPct)" } ?? "Season stats", items: items, players: Array(skaters) + goalies)
@@ -179,12 +194,14 @@ public struct NHLProvider: LeagueDashboardProviding {
         schedule: NHLScheduleGame,
         landing: NHLLandingResponse?,
         boxscore: NHLBoxscoreResponse?,
-        team: TeamSummary
+        team: TeamSummary,
+        catalog: TeamCatalog = .shared
     ) -> GameSnapshot {
         let away = landing?.awayTeam ?? schedule.awayTeam
         let home = landing?.homeTeam ?? schedule.homeTeam
         let isHome = home.abbrev.uppercased() == team.abbreviation
         let opponent = isHome ? away : home
+        let opponentTeam = catalog.team(for: TeamID(league: .nhl, code: opponent.abbrev))
         let state = (landing?.gameState ?? schedule.gameState ?? "").uppercased()
         let phase: GamePhase
         switch state {
@@ -194,12 +211,9 @@ public struct NHLProvider: LeagueDashboardProviding {
         default: phase = .unknown
         }
         let period = landing?.periodDescriptor ?? schedule.periodDescriptor
-        let clock = landing?.clock ?? schedule.clock
-        var periodLabel: String?
-        if let number = period?.number {
-            let kind = period?.periodType == "OT" ? "OT" : (period?.periodType == "SO" ? "SO" : "P\(number)")
-            periodLabel = kind
-        }
+        let clock = phase == .live ? (landing?.clock ?? schedule.clock) : nil
+        // Schedules carry a period-1 descriptor for future games; only label started games.
+        var periodLabel = (phase == .live || phase == .final) ? period.map(Self.periodLabel) : nil
         if clock?.inIntermission == true {
             periodLabel = [periodLabel, "INT"].compactMap { $0 }.joined(separator: " ")
         }
@@ -221,7 +235,7 @@ public struct NHLProvider: LeagueDashboardProviding {
         }
         var scoring: [String] = []
         for periodBlock in landing?.summary?.scoring ?? [] {
-            let label = periodBlock.periodDescriptor?.number.map { "P\($0)" } ?? "Period"
+            let label = periodBlock.periodDescriptor.map(Self.periodLabel) ?? "Period"
             for goal in periodBlock.goals {
                 scoring.append("\(label) \(goal.teamAbbrev?.value ?? "") \(goal.name?.value ?? "Goal") (\(goal.strength ?? "ev"))")
             }
@@ -232,19 +246,20 @@ public struct NHLProvider: LeagueDashboardProviding {
         case .live:
             headline = [periodLabel, clock?.timeRemaining].compactMap { $0 }.joined(separator: " · ")
         case .final:
-            headline = "Final"
+            headline = ["OT", "SO"].contains(period?.periodType ?? "") ? "Final/\(period?.periodType ?? "")" : "Final"
         case .upcoming:
             headline = DateParser.parse(landing?.startTimeUTC ?? schedule.startTimeUTC).map { DateParser.weekdayTime(date: $0) } ?? "Upcoming"
         case .unknown:
-            headline = state
+            headline = state.isEmpty ? "Game" : state.capitalized
         }
+        let feedName = [opponent.placeName?.value, opponent.commonName?.value].compactMap { $0 }.joined(separator: " ")
         return GameSnapshot(
             id: String(schedule.id),
             phase: phase,
             start: DateParser.parse(landing?.startTimeUTC ?? schedule.startTimeUTC),
-            opponentName: [opponent.placeName?.value, opponent.commonName?.value].compactMap { $0 }.joined(separator: " "),
+            opponentName: opponentTeam?.displayName ?? (feedName.isEmpty ? opponent.abbrev : feedName),
             opponentCode: opponent.abbrev,
-            opponentLogoURL: URL(string: opponent.logo ?? ""),
+            opponentLogoURL: opponentTeam?.logoURL ?? TeamCatalog.logoURL(league: .nhl, abbreviation: opponent.abbrev),
             isHome: isHome,
             venue: landing?.venue?.value ?? schedule.venue?.value,
             venueCity: landing?.venueLocation?.value,
@@ -273,7 +288,7 @@ public struct NHLProvider: LeagueDashboardProviding {
                 name: skater.name.value,
                 position: skater.position,
                 line: "\(skater.points ?? 0) pts",
-                secondary: "\(skater.goals ?? 0)G \(skater.assists ?? 0)A · \(skater.toi ?? "")"
+                secondary: ["\(skater.goals ?? 0)G \(skater.assists ?? 0)A", skater.toi].compactMap { $0 }.joined(separator: " · ")
             )
         }
         let goalies = (team.goalies ?? []).map { goalie in
@@ -287,6 +302,22 @@ public struct NHLProvider: LeagueDashboardProviding {
         }
         return Array(top) + goalies
     }
+
+    /// P1–P3, OT (2OT, 3OT… in the playoffs) and SO.
+    static func periodLabel(_ period: NHLPeriod) -> String {
+        let number = period.number ?? 0
+        switch period.periodType?.uppercased() {
+        case "SO": return "SO"
+        case "OT": return number > 4 ? "\(number - 3)OT" : "OT"
+        default: return number > 0 ? "P\(number)" : "—"
+        }
+    }
+
+    private static func savePct(_ value: Double?) -> String {
+        guard let value else { return "—" }
+        let text = String(format: "%.3f", value)
+        return text.hasPrefix("0") ? String(text.dropFirst()) : text
+    }
 }
 
 enum NHLAPI {
@@ -295,9 +326,9 @@ enum NHLAPI {
     static func clubWeek(_ team: String) -> URL { URL(string: "https://api-web.nhle.com/v1/club-schedule/\(team)/week/now")! }
     static func landing(_ id: Int) -> URL? { URL(string: "https://api-web.nhle.com/v1/gamecenter/\(id)/landing") }
     static func boxscore(_ id: Int) -> URL? { URL(string: "https://api-web.nhle.com/v1/gamecenter/\(id)/boxscore") }
-    static let teamSummary: URL? = {
+    static func teamSummary(season: String) -> URL? {
         var components = URLComponents(string: "https://api.nhle.com/stats/rest/en/team/summary")
-        components?.queryItems = [URLQueryItem(name: "cayenneExp", value: "gameTypeId=2 and seasonId=20262027")]
+        components?.queryItems = [URLQueryItem(name: "cayenneExp", value: "gameTypeId=2 and seasonId=\(season)")]
         return components?.url
-    }()
+    }
 }

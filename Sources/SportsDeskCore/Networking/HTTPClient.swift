@@ -23,19 +23,23 @@ public struct HTTPClient: Sendable {
     public var transport: any HTTPSession
     public var userAgent: String
     public var extraHeaders: [String: String]
+    public var timeout: TimeInterval
 
     public init(
         transport: any HTTPSession = URLSessionTransport(),
         userAgent: String = "SportsDesk/1.0 (personal sports dashboard)",
-        extraHeaders: [String: String] = [:]
+        extraHeaders: [String: String] = [:],
+        timeout: TimeInterval = 15
     ) {
         self.transport = transport
         self.userAgent = userAgent
         self.extraHeaders = extraHeaders
+        self.timeout = timeout
     }
 
     public func get(url: URL, headers: [String: String] = [:]) async throws -> Data {
-        var request = URLRequest(url: url)
+        // Live scores must not come from URLCache.
+        var request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: timeout)
         request.httpMethod = "GET"
         request.setValue(userAgent, forHTTPHeaderField: "User-Agent")
         request.setValue("application/json, text/html;q=0.9, */*;q=0.8", forHTTPHeaderField: "Accept")
@@ -178,11 +182,39 @@ struct FlexibleID: Decodable, Sendable {
         let container = try decoder.singleValueContainer()
         if let int = try? container.decode(Int.self) {
             value = String(int)
+        } else if let double = try? container.decode(Double.self) {
+            value = double.rounded() == double ? String(Int(double)) : String(double)
         } else if let text = try? container.decode(String.self) {
             value = text
+        } else if let keyed = try? decoder.container(keyedBy: CodingKeys.self) {
+            // ESPN team schedules wrap scores: {"value": 23.0, "displayValue": "23"}.
+            value = (try? keyed.decode(String.self, forKey: .displayValue))
+                ?? (try? keyed.decode(Double.self, forKey: .value)).map { String(Int($0)) }
+                ?? ""
         } else {
             value = ""
         }
+    }
+
+    private enum CodingKeys: String, CodingKey {
+        case value, displayValue
+    }
+}
+
+public enum Season {
+    /// NHL season id such as 20262027; a season starts in September.
+    public static func nhlSeasonID(for date: Date, calendar: Calendar = .init(identifier: .gregorian)) -> String {
+        let parts = calendar.dateComponents(in: TimeZone(identifier: "America/New_York") ?? .current, from: date)
+        let year = parts.year ?? 2026
+        let start = (parts.month ?? 1) >= 9 ? year : year - 1
+        return "\(start)\(start + 1)"
+    }
+
+    /// NFL season year; January/February playoff games belong to the previous year's season.
+    public static func nflSeasonYear(for date: Date, calendar: Calendar = .init(identifier: .gregorian)) -> Int {
+        let parts = calendar.dateComponents(in: TimeZone(identifier: "America/New_York") ?? .current, from: date)
+        let year = parts.year ?? 2026
+        return (parts.month ?? 1) >= 3 ? year : year - 1
     }
 }
 

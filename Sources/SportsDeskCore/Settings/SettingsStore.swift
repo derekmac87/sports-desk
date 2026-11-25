@@ -15,6 +15,17 @@ public struct UserSettings: Hashable, Codable, Sendable {
             FavouriteTeam(league: .nfl, code: "GB")
         ]
     )
+
+    private enum CodingKeys: String, CodingKey {
+        case favourites, useDeviceTimeZone
+    }
+
+    // Tolerates missing keys so adding settings later doesn't wipe a user's synced favourites.
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        favourites = try container.decodeIfPresent([FavouriteTeam].self, forKey: .favourites) ?? []
+        useDeviceTimeZone = try container.decodeIfPresent(Bool.self, forKey: .useDeviceTimeZone) ?? true
+    }
 }
 
 public protocol KeyValueStore: Sendable {
@@ -85,12 +96,14 @@ public final class SettingsStore: @unchecked Sendable {
 
     private let local: any KeyValueStore
     private let cloud: (any KeyValueStore)?
+    private let catalog: TeamCatalog
     private let encoder = JSONEncoder()
     private let decoder = JSONDecoder()
 
-    public init(local: any KeyValueStore, cloud: (any KeyValueStore)? = nil) {
+    public init(local: any KeyValueStore, cloud: (any KeyValueStore)? = nil, catalog: TeamCatalog = .shared) {
         self.local = local
         self.cloud = cloud
+        self.catalog = catalog
     }
 
     public static func production() -> SettingsStore {
@@ -125,13 +138,12 @@ public final class SettingsStore: @unchecked Sendable {
         load()
     }
 
+    /// Drops duplicates and teams no longer in the catalog. An empty list is a valid choice;
+    /// defaults only apply when nothing has been saved yet.
     private func sanitized(_ settings: UserSettings) -> UserSettings {
         var seen = Set<String>()
         let favourites = settings.favourites.filter { favourite in
-            seen.insert(favourite.id).inserted
-        }
-        if favourites.isEmpty {
-            return .default
+            catalog.team(for: favourite.teamID) != nil && seen.insert(favourite.id).inserted
         }
         return UserSettings(favourites: favourites, useDeviceTimeZone: settings.useDeviceTimeZone)
     }
